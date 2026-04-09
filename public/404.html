@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f9f9f9" />
+    <title>Page not found (404) | Simple Screen Recorder</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        color-scheme: light;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
+        background: #f9f9f9;
+        color: #18181b;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem max(1.5rem, env(safe-area-inset-right)) max(2rem, env(safe-area-inset-bottom))
+          max(1.5rem, env(safe-area-inset-left));
+        text-align: center;
+        line-height: 1.5;
+      }
+      .code {
+        font-size: clamp(3rem, 12vw, 4.5rem);
+        font-weight: 600;
+        letter-spacing: -0.06em;
+        color: #d4d4d8;
+        line-height: 1;
+        margin-bottom: 1rem;
+      }
+      h1 {
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        color: #52525b;
+        max-width: 26rem;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+      }
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        background: #000;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 9999px;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      a:hover {
+        background: #27272a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="code" aria-hidden="true">404</div>
+    <h1>Page not found</h1>
+    <p>
+      The page you requested doesn’t exist or may have been moved. If you opened a bookmark, try starting from the home
+      page.
+    </p>
+    <a href="/">Back to home</a>
+  </body>
+</html>

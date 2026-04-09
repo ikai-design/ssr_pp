@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Editor — Simple Screen Recorder (preview)</title>
+  <link rel="stylesheet" href="./design-tokens.css" />
+  <link rel="stylesheet" href="./components.css" />
+  <link rel="stylesheet" href="./editor-layout.css" />
+  <link rel="stylesheet" href="./editor-hero-static.css" />
+</head>
+<body class="ds-body ds-reset editor-hero-page">
+  <div class="layout editor-view visible">
+    <div class="editor-row">
+      <div class="editor-main">
+        <div class="editor-center" id="editorCenter">
+          <div class="preview-stage-shell" id="previewStageShell">
+            <div class="preview-stage-canvas">
+              <div class="video-bg-container" id="videoBgContainer">
+                <div class="video-frame" id="videoFrameEl">
+                  <div class="video-frame-chrome">
+                    <span class="video-frame-dots"></span>
+                    <span class="video-frame-url"></span>
+                  </div>
+                  <div class="ds-video-container ds-flex-1 video-preview-wrap" id="videoPreviewWrap">
+                    <video id="videoPreview" playsinline></video>
+                    <div id="videoLoadingSpinner" class="video-loading-spinner hidden">
+                      <div class="processing-spinner"></div>
+                      <span>Loading video…</span>
+                    </div>
+                    <div id="heroPreviewHtml" class="hero-static-preview">
+                      <div class="hero-static-preview-inner">
+                        <p class="hero-static-kicker">Versus a basic recorder</p>
+                        <p class="hero-static-lead">
+                          Same browser—more control.
+                          <span class="hero-static-lead-fine">Free in Chrome; basics often cap out before editing &amp; export.</span>
+                        </p>
+                        <table class="hero-static-table">
+                          <thead>
+                            <tr>
+                              <th class="hero-static-th-feature" scope="col">Features</th>
+                              <th class="hero-static-th-stack" scope="col">
+                                <span class="hero-static-th-title">Basic</span>
+                                <span class="hero-static-th-note">Pricing varies</span>
+                              </th>
+                              <th class="hero-static-th-stack" scope="col">
+                                <span class="hero-static-th-title">SSR</span>
+                                <span class="hero-static-th-note">Free</span>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Zoom-to-cursor storytelling</td>
+                              <td>✕</td>
+                              <td>✓</td>
+                            </tr>
+                            <tr>
+                              <td>Timeline (trim / zoom blocks)</td>
+                              <td>✕</td>
+                              <td>✓</td>
+                            </tr>
+                            <tr>
+                              <td>Local MP4 without cloud</td>
+                              <td><span class="hero-static-varies" title="Varies">−</span></td>
+                              <td>✓</td>
+                            </tr>
+                            <tr>
+                              <td>Backgrounds &amp; aspect presets</td>
+                              <td>✕</td>
+                              <td>✓</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <svg id="cursorOverlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="display:none">
+                      <path d="M5.5 3.21V20.8c0 .45.54.67.86.35l4.86-4.86h7.37c.45 0 .67-.54.35-.86L5.85 2.35a.5.5 0 0 0-.35.86z" fill="#000" stroke="#fff" stroke-width="1.5"/>
+                    </svg>
+                    <div id="videoError"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-playback-bar preview-playback-bar" id="playbackBar">
+              <span class="ds-btn ds-btn-primary ds-btn-icon" style="pointer-events:none">▶</span>
+              <span class="ds-time-display" id="timeDisplay">00:09 / 00:10</span>
+              <div class="ds-progress-wrap">
+                <input type="range" id="progressBar" min="0" max="100" value="90" step="0.1" aria-label="Scrub" disabled />
+              </div>
+              <span class="playback-vol-btn" style="pointer-events:none">
+                <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <path d="M15.54 8.46a5 5 0 010 7.07"/>
+                  <path d="M19.07 4.93a10 10 0 010 14.14"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="editor-timeline">
+          <div class="ds-timeline-toolbar">
+            <div class="tl-segment-options-wrap">
+              <span class="ds-btn ds-btn-primary ds-btn-sm btn-icon-leading" style="pointer-events:none">
+                <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><use href="icons.svg#i-plus"></use></svg>
+                <span>Add</span>
+              </span>
+            </div>
+            <span class="ds-btn ds-btn-secondary ds-btn-sm btn-icon-leading" style="pointer-events:none;opacity:0.5">
+              <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24"><use href="icons.svg#i-trash-2"></use></svg>
+              <span>Delete</span>
+            </span>
+            <div class="tl-toolbar-spacer"></div>
+            <span class="ds-btn ds-btn-secondary ds-btn-sm btn-icon-leading" style="pointer-events:none;opacity:0.5">
+              <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24"><use href="icons.svg#i-undo-2"></use></svg>
+              <span>Undo</span>
+            </span>
+            <span class="ds-btn ds-btn-secondary ds-btn-sm btn-icon-leading" style="pointer-events:none;opacity:0.5">
+              <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24"><use href="icons.svg#i-redo-2"></use></svg>
+              <span>Redo</span>
+            </span>
+            <span class="ds-btn ds-btn-secondary ds-btn-sm btn-icon-leading" style="pointer-events:none">
+              <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24"><use href="icons.svg#i-rotate-ccw"></use></svg>
+              <span>Reset</span>
+            </span>
+            <div class="tl-zoom-controls">
+              <span class="tl-zoom-btn" style="pointer-events:none">
+                <svg class="ui-icon ui-icon-xs" viewBox="0 0 24 24"><use href="icons.svg#i-minus"></use></svg>
+              </span>
+              <input type="range" class="tl-zoom-slider" value="2" min="1" max="10" step="0.5" disabled />
+              <span class="tl-zoom-btn" style="pointer-events:none">
+                <svg class="ui-icon ui-icon-xs" viewBox="0 0 24 24"><use href="icons.svg#i-plus"></use></svg>
+              </span>
+            </div>
+          </div>
+          <div class="tl-ruler-scroll" id="timelineRulerScroll">
+            <div class="tl-ruler" id="timelineRuler">
+              <div class="tl-marks" id="timelineMarks">
+                <span style="left:0%">00:00</span>
+                <span style="left:20%">00:02</span>
+                <span style="left:40%">00:04</span>
+                <span style="left:60%">00:06</span>
+                <span style="left:80%">00:08</span>
+                <span style="left:100%">00:10</span>
+              </div>
+              <div class="tl-track" id="timelineTrack">
+                <div class="tl-block tl-block-trim" style="left: 2%; width: 19%;">
+                  <span class="tl-block-icon"><svg class="tl-block-icon-inner" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><use href="icons.svg#i-scissors"></use></svg></span>
+                  <span class="tl-block-label">Trim</span>
+                </div>
+                <div class="tl-block tl-block-zoom selected" style="left: 23%; width: 36%;">
+                  <span class="tl-block-icon"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><use href="icons.svg#i-search-plus"></use></svg></span>
+                  <span class="tl-block-label">Zoom</span>
+                </div>
+                <div class="tl-block tl-block-trim" style="left: 61%; width: 17%;">
+                  <span class="tl-block-icon"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><use href="icons.svg#i-scissors"></use></svg></span>
+                  <span class="tl-block-label">Trim</span>
+                </div>
+              </div>
+              <div class="tl-playhead" id="timelinePlayhead">
+                <div class="tl-playhead-head"></div>
+                <div class="tl-playhead-line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-sidebar" id="editorSidebar">
+        <div class="editor-sidebar-scroll">
+          <section class="sidebar-hero">
+            <div class="ds-btn ds-btn-primary ds-btn-lg ds-btn-block" style="pointer-events:none;text-align:center">Export MP4</div>
+            <p id="recStatus" class="sidebar-meta">Original · 1.6 MB</p>
+          </section>
+
+          <div class="sidebar-card">
+            <div class="sidebar-group">
+              <label class="ds-label">Background</label>
+              <div class="seg-control seg-control-sm" id="bgTabControl">
+                <span class="seg-control-btn active">Gradient</span>
+                <span class="seg-control-btn">Color</span>
+                <span class="seg-control-btn">Hidden</span>
+              </div>
+              <div class="bg-tab-panel active" id="bgPanelGradient">
+                <div class="bg-preset-grid" id="bgGradientGrid">
+                  <span class="bg-preset-swatch active" data-id="silver" style="background: linear-gradient(135deg, #f8fafc, #f1f5f9, #e2e8f0)"></span>
+                  <span class="bg-preset-swatch" data-id="graphite" style="background: linear-gradient(135deg, #475569, #334155, #1e293b)"></span>
+                  <span class="bg-preset-swatch" data-id="midnight" style="background: linear-gradient(135deg, #1e293b, #0f172a, #020617)"></span>
+                  <span class="bg-preset-swatch" data-id="starlight" style="background: linear-gradient(135deg, #fffcf9, #fbf2e9, #f5e6d3)"></span>
+                  <span class="bg-preset-swatch" data-id="sierra" style="background: linear-gradient(135deg, #e0f2fe, #bae6fd, #7dd3fc)"></span>
+                  <span class="bg-preset-swatch" data-id="mint" style="background: linear-gradient(135deg, #ecfdf5, #a7f3d0, #6ee7b7)"></span>
+                  <span class="bg-preset-swatch" data-id="lavender" style="background: linear-gradient(135deg, #f5f3ff, #ede9fe, #ddd6fe)"></span>
+                  <span class="bg-preset-swatch" data-id="blush" style="background: linear-gradient(135deg, #fff1f2, #ffe4e6, #fecdd3)"></span>
+                  <span class="bg-preset-swatch" data-id="ventura" style="background: linear-gradient(135deg, #fca5a5, #f472b6, #c084fc)"></span>
+                  <span class="bg-preset-swatch" data-id="monterey" style="background: linear-gradient(135deg, #c084fc, #818cf8, #38bdf8)"></span>
+                  <span class="bg-preset-swatch" data-id="sonoma" style="background: linear-gradient(135deg, #fbbf24, #34d399, #2dd4bf)"></span>
+                  <span class="bg-preset-swatch" data-id="catalina" style="background: linear-gradient(135deg, #2563eb, #4338ca, #312e81)"></span>
+                </div>
+              </div>
+              <div class="bg-tab-panel" id="bgPanelColor"></div>
+            </div>
+            <div class="sidebar-group-divider"></div>
+            <div class="sidebar-group">
+              <label class="ds-label">Frame</label>
+              <div class="seg-control seg-control-sm" id="frameStyleControl">
+                <span class="seg-control-btn active">Default</span>
+                <span class="seg-control-btn">Minimal</span>
+                <span class="seg-control-btn">Hidden</span>
+              </div>
+              <div class="frame-toggles" id="frameToggles">
+                <div class="toggle-row">
+                  <span class="toggle-row-label">Shadow</span>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked disabled />
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="toggle-row">
+                  <span class="toggle-row-label">Border</span>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked disabled />
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="sidebar-group-divider"></div>
+            <div class="sidebar-group sidebar-group-inline">
+              <label class="ds-label">Aspect ratio</label>
+              <select id="aspectSelect" class="ds-select" disabled>
+                <option value="native" selected>Native</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sidebar-card" id="enhancementsCard">
+            <div class="sidebar-group" id="cursorSection">
+              <div class="toggle-row" id="cursorToggleRow">
+                <span class="toggle-row-label" style="font-weight:500">Cursor</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" disabled />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <p class="sidebar-hint" id="cursorHint">No cursor movement was captured in this recording.</p>
+            </div>
+            <div class="sidebar-group-divider" id="enhancementsDivider"></div>
+            <div class="sidebar-group" id="autoZoomSection">
+              <div class="toggle-row" id="autoZoomToggleRow">
+                <span class="toggle-row-label" style="font-weight:500">Auto Zoom</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" disabled />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <p class="sidebar-hint" id="autoZoomHint">No clicks were captured to drive zoom.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

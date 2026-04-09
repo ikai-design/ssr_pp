@@ -1,0 +1,216 @@
+/**
+ * Simple Screen Recorder – Design System Tokens
+ * Reusable CSS custom properties for colors, typography, spacing, radius, shadows.
+ * Link this file in every HTML page: <link rel="stylesheet" href="design-tokens.css">
+ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+
+:root {
+  /* ─── Colors ───────────────────────────────────────────────────────────── */
+  /* Primary — monochrome black */
+  --color-primary: #111111;
+  --color-primary-hover: #000000;
+  --color-primary-muted: rgba(0, 0, 0, 0.04);
+  --color-primary-border: rgba(0, 0, 0, 0.12);
+  --color-primary-bg-soft: #f5f5f5;
+
+  /* Neutral (grays) */
+  --color-text: #111111;
+  --color-text-muted: #6b7280;
+  --color-text-hint: #9ca3af;
+  --color-text-inverse: #FFFFFF;
+
+  --color-bg: #FFFFFF;
+  --color-bg-subtle: #fafafa;
+  --color-bg-muted: #f3f4f6;
+  --color-bg-disabled: #e5e7eb;
+  --color-bg-page: #f5f5f5;
+  --color-bg-dark: #111111;
+
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  --color-border-disabled: #e5e7eb;
+
+  /* Semantic */
+  --color-success: #111111;
+  --color-success-bg: #f5f5f5;
+  --color-error: #ef4444;
+  --color-error-bg: #fef2f2;
+  --color-warning: #f59e0b;
+  --color-warning-bg: rgba(245, 158, 11, 0.08);
+  --color-disabled: #d1d5db;
+  --color-disabled-text: #9ca3af;
+
+  /* Accent — used sparingly for active states */
+  --color-accent: #10b981;
+  --color-accent-light: rgba(16, 185, 129, 0.08);
+
+  /* Checkbox / control */
+  --color-checkbox-border: #d1d5db;
+  --color-checkbox-checked: var(--color-primary);
+
+  /* Slider / range */
+  --color-slider-track: #e5e7eb;
+  --color-slider-thumb: var(--color-primary);
+  --color-slider-label: #9ca3af;
+
+  /* ─── Typography ───────────────────────────────────────────────────────── */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 13px;
+  --font-size-lg: 16px;
+  --font-size-xl: 20px;
+  --font-size-display: 48px;
+
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-timer: 1px;
+  --line-height-tight: 1.4;
+  --line-height-normal: 1.5;
+
+  /* Type roles (combinations) */
+  --text-brand: var(--font-size-lg) var(--font-weight-bold) var(--color-text);
+  --text-heading: var(--font-size-md) var(--font-weight-bold) var(--color-text);
+  --text-body: var(--font-size-base) var(--font-weight-medium) var(--color-text);
+  --text-hint: var(--font-size-sm) var(--color-text-muted);
+  --text-tip: var(--font-size-xs) var(--color-text-hint);
+  --text-timer: var(--font-size-display) var(--font-weight-bold) var(--color-text);
+  --text-status: var(--font-size-sm);
+  --text-link: var(--font-size-base) var(--font-weight-medium) var(--color-text);
+  --text-label: var(--font-size-md) var(--color-text-muted);
+  --text-time: var(--font-size-base) var(--color-text-muted);
+
+  /* ─── Spacing ──────────────────────────────────────────────────────────── */
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+
+  /* ─── Border radius ─────────────────────────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-base: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+  --radius-pill: 999px;
+  --radius-full: 50%;
+
+  /* ─── Shadows ──────────────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* ─── Transitions ──────────────────────────────────────────────────────── */
+  --transition-fast: 0.15s;
+  --transition-normal: 0.2s;
+
+  /* ─── Component tokens (convenience) ────────────────────────────────────── */
+  /* Buttons */
+  --btn-primary-bg: var(--color-primary);
+  --btn-primary-bg-hover: var(--color-primary-hover);
+  --btn-primary-color: var(--color-text-inverse);
+  --btn-primary-disabled-bg: var(--color-disabled);
+  --btn-primary-disabled-color: var(--color-disabled-text);
+
+  --btn-secondary-bg: var(--color-bg);
+  --btn-secondary-bg-hover: var(--color-bg-muted);
+  --btn-secondary-color: var(--color-text);
+  --btn-secondary-border: var(--color-border);
+  --btn-secondary-border-hover: var(--color-border-strong);
+  --btn-secondary-disabled-bg: var(--color-bg);
+  --btn-secondary-disabled-color: var(--color-disabled-text);
+
+  --btn-padding-y: 10px;
+  --btn-padding-x: 20px;
+  --btn-padding-lg-x: 28px;
+  --btn-font-size: var(--font-size-base);
+  --btn-font-weight: var(--font-weight-medium);
+  --btn-radius: var(--radius-pill);
+
+  /* Option row / card */
+  --option-row-bg: var(--color-bg-subtle);
+  --option-row-bg-active: var(--color-primary-muted);
+  --option-row-border: var(--color-border);
+  --option-row-border-active: var(--color-primary-border);
+  --option-row-padding: var(--space-10) var(--space-12);
+  --option-row-radius: var(--radius-lg);
+  --option-row-gap: var(--space-10);
+
+  /* Checkbox */
+  --checkbox-size: 18px;
+  --checkbox-icon-size: 10px;
+  --checkbox-radius: var(--radius-sm);
+  --checkbox-border-width: 2px;
+
+  /* Hint / status box */
+  --hint-bg: var(--color-bg-muted);
+  --hint-border: var(--color-border);
+  --hint-radius: var(--radius-base);
+  --hint-padding: var(--space-8) var(--space-10);
+
+  /* Brand icon */
+  --brand-icon-size: 22px;
+  --brand-icon-radius: var(--radius-md);
+  --brand-gap: var(--space-8);
+
+  /* Sidebar */
+  --sidebar-width: 280px;
+  --sidebar-bg: var(--color-bg);
+  --sidebar-border: var(--color-border);
+  --sidebar-radius: 0 var(--radius-2xl) 0 0;
+
+  /* Video container */
+  --video-container-bg: var(--color-bg-dark);
+  --video-container-radius: var(--radius-xl);
+  --video-container-border: var(--color-border);
+  --video-container-min-height: 300px;
+
+  /* Playback bar */
+  --play-btn-size: 36px;
+  --play-btn-radius: var(--radius-full);
+  --progress-thumb-size: 14px;
+  --progress-track-height: 4px;
+  --progress-wrap-height: 24px;
+  --radius-track: 2px;
+
+  /* Recording indicator */
+  --rec-dot-size: 8px;
+
+  /* Timeline */
+  --timeline-track-height: 32px;
+  --timeline-ruler-height: 48px;
+  --timeline-zoom-bg: var(--color-primary);
+  --timeline-zoom-color: var(--color-text-inverse);
+  --timeline-zoom-min-width: 60px;
+  --timeline-mark-color: var(--color-text-hint);
+  --timeline-mark-font-size: var(--font-size-xs);
+  --timeline-mark-min-width: 32px;
+
+  /* Popup */
+  --popup-width: 320px;
+  --popup-padding: var(--space-20);
+  --popup-body-radius: var(--radius-3xl);
+  --popup-block-gap: var(--space-18);
+
+  /* Preview page (iframe sizes) */
+  --preview-popup-min-height: 520px;
+  --preview-popup-height: 620px;
+  --preview-editor-height: 720px;
+  --preview-breakpoint: 900px;
+}

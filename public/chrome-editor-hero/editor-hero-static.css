@@ -1,0 +1,217 @@
+/* Overrides for marketing static snapshot (no extension JS) */
+.editor-hero-page {
+  overflow: hidden;
+}
+
+.editor-hero-page .editor-view {
+  display: flex !important;
+  flex: 1;
+  min-height: 0;
+}
+
+.editor-hero-page #videoPreview,
+.editor-hero-page #videoLoadingSpinner,
+.editor-hero-page #cursorOverlay,
+.editor-hero-page #videoError {
+  display: none !important;
+}
+
+.editor-hero-page .hero-static-preview {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  background: var(--color-bg-muted);
+  padding: 12px;
+}
+
+.editor-hero-page .hero-static-preview-inner {
+  width: 100%;
+  max-width: 100%;
+  background: var(--color-bg);
+  border-radius: var(--radius-base);
+  border: 1px solid var(--color-border);
+  padding: 10px 12px 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.editor-hero-page .hero-static-kicker {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.editor-hero-page .hero-static-lead {
+  margin: 0 0 10px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+}
+
+.editor-hero-page .hero-static-lead-fine {
+  display: block;
+  margin-top: 5px;
+  font-size: 9px;
+  line-height: 1.35;
+  color: var(--color-text-hint);
+}
+
+.editor-hero-page .hero-static-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.editor-hero-page .hero-static-table th,
+.editor-hero-page .hero-static-table td {
+  border: 1px solid var(--color-border);
+  padding: 4px 6px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.editor-hero-page .hero-static-table th:first-child,
+.editor-hero-page .hero-static-table td:first-child {
+  width: 50%;
+}
+
+.editor-hero-page .hero-static-table th:nth-child(2),
+.editor-hero-page .hero-static-table th:nth-child(3),
+.editor-hero-page .hero-static-table td:nth-child(2),
+.editor-hero-page .hero-static-table td:nth-child(3) {
+  text-align: center;
+  width: 25%;
+  min-width: 4.75rem;
+}
+
+.editor-hero-page .hero-static-table th {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-hint);
+  font-weight: 600;
+}
+
+.editor-hero-page .hero-static-th-feature {
+  text-align: left;
+  vertical-align: middle;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.editor-hero-page .hero-static-th-stack {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.25;
+}
+
+.editor-hero-page .hero-static-th-title {
+  display: block;
+  font-weight: 600;
+}
+
+.editor-hero-page .hero-static-th-note {
+  display: block;
+  font-weight: 500;
+  font-size: 8px;
+  color: var(--color-text-muted);
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+.editor-hero-page .hero-static-maybe {
+  font-size: 9px;
+  color: var(--color-text-muted);
+}
+
+/* Matches ✕ / ✓ weight: neutral “varies” glyph */
+.editor-hero-page .hero-static-varies {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-text-muted);
+  opacity: 0.75;
+}
+
+.editor-hero-page .video-frame-url::before {
+  content: 'Recorded tab · preview';
+}
+
+/*
+ * Traffic lights: 2nd/3rd circles are box-shadows on a 10×10 dot — do NOT widen the element
+ * (width ≠ 10px turns border-radius:50% into a pill). Reserve space with margin instead.
+ */
+.editor-hero-page .video-frame-dots {
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  width: 10px;
+  min-width: 10px;
+  max-width: 10px;
+  height: 10px;
+  margin-right: 42px;
+}
+
+.editor-hero-page .video-frame-url {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Timeline fits container — no horizontal scroll track (real editor scrolls long sequences) */
+.editor-hero-page .tl-ruler-scroll {
+  overflow: hidden;
+  scrollbar-width: none;
+}
+
+.editor-hero-page .tl-ruler-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.editor-hero-page #timelineRuler {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.editor-hero-page #timelinePlayhead {
+  left: 88%;
+}
+
+.editor-hero-page .tl-track {
+  pointer-events: none;
+}
+
+/* Sidebar is a fixed-height marketing snapshot — no inner scroll */
+.editor-hero-page .editor-sidebar-scroll {
+  overflow: hidden;
+  scrollbar-width: none;
+}
+
+.editor-hero-page .editor-sidebar-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.editor-hero-page .tl-edge-handle {
+  display: none !important;
+}
+
+.editor-hero-page .seg-control-btn {
+  pointer-events: none;
+}
+
+.editor-hero-page #rateBanner {
+  display: none !important;
+}
+
+.editor-hero-page #exportToast {
+  display: none !important;
+}
