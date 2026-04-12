@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Video, ArrowLeft, ArrowRight } from 'lucide-react';
-import { CHROME_WEB_STORE_URL, SUPPORT_MAILTO } from '../config';
+import { CHROME_WEB_STORE_URL, SUPPORT_MAILTO, SUPPORT_MAILTO_TITLE } from '../config';
 import '../App.css';
 import '../legal.css';
 
@@ -25,9 +25,6 @@ export default function ErrorShell({ code, title, description, documentTitle }) 
             <span className="logo-text">Simple Screen Recorder</span>
           </Link>
           <div className="legal-header-actions">
-            <a href={SUPPORT_MAILTO} className="legal-header-link">
-              Contact
-            </a>
             <a
               href={CHROME_WEB_STORE_URL}
               className="btn btn-primary btn-header-cta"
@@ -53,6 +50,11 @@ export default function ErrorShell({ code, title, description, documentTitle }) 
             Back to home
           </Link>
         </div>
+        <p className="error-footer-contact">
+          <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
+            Contact
+          </a>
+        </p>
       </main>
     </div>
   );

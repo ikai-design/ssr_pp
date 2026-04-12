@@ -7,6 +7,8 @@ import {
   LEGAL_EFFECTIVE_DATE,
   PRIVACY_POLICY_URL,
   SUPPORT_MAILTO,
+  SUPPORT_MAILTO_TITLE,
+  TERMS_PUBLIC_URL,
 } from '../config';
 
 export default function TermsOfService() {
@@ -14,6 +16,7 @@ export default function TermsOfService() {
     <LegalDocumentLayout
       title="Terms of Service"
       meta={`Effective date: ${LEGAL_EFFECTIVE_DATE} · Last updated: ${LEGAL_EFFECTIVE_DATE}`}
+      canonicalHref={TERMS_PUBLIC_URL || undefined}
     >
       <section className="legal-section" aria-labelledby="t-accept">
         <h2 id="t-accept">1. Agreement to these terms</h2>
@@ -186,7 +189,11 @@ export default function TermsOfService() {
       <section className="legal-section" aria-labelledby="t-contact">
         <h2 id="t-contact">15. Contact</h2>
         <p>
-          Questions about these Terms: <a href={SUPPORT_MAILTO}>support contact on the Site</a>.
+          Questions about these Terms:{' '}
+          <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
+            support contact on the Site
+          </a>
+          .
         </p>
       </section>
     </LegalDocumentLayout>

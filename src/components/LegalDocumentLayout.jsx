@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Video, ArrowRight, ArrowLeft } from 'lucide-react';
-import { CHROME_WEB_STORE_URL, PRIVACY_POLICY_URL, TERMS_URL, SUPPORT_MAILTO } from '../config';
+import { CHROME_WEB_STORE_URL, PRIVACY_POLICY_URL, TERMS_URL, SUPPORT_MAILTO, SUPPORT_MAILTO_TITLE } from '../config';
+import { useCanonicalLink } from '../hooks/useCanonicalLink';
 import '../App.css';
 import '../legal.css';
 
-export default function LegalDocumentLayout({ title, meta, children }) {
+export default function LegalDocumentLayout({ title, meta, canonicalHref, children }) {
+  useCanonicalLink(canonicalHref || null);
+
   useEffect(() => {
     document.title = `${title} | Simple Screen Recorder`;
     window.scrollTo(0, 0);
@@ -23,9 +26,6 @@ export default function LegalDocumentLayout({ title, meta, children }) {
             <span className="logo-text">Simple Screen Recorder</span>
           </Link>
           <div className="legal-header-actions">
-            <a href={SUPPORT_MAILTO} className="legal-header-link">
-              Contact
-            </a>
             <a
               href={CHROME_WEB_STORE_URL}
               className="btn btn-primary btn-header-cta"
@@ -57,6 +57,9 @@ export default function LegalDocumentLayout({ title, meta, children }) {
               Back to home
             </Link>
             <div className="legal-footer-links">
+              <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
+                Contact
+              </a>
               <Link to={PRIVACY_POLICY_URL}>Privacy</Link>
               <Link to={TERMS_URL}>Terms</Link>
             </div>

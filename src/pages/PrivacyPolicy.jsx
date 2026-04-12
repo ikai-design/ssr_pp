@@ -6,6 +6,8 @@ import {
   LEGAL_EFFECTIVE_DATE,
   TERMS_URL,
   SUPPORT_MAILTO,
+  SUPPORT_MAILTO_TITLE,
+  PRIVACY_POLICY_PUBLIC_URL,
 } from '../config';
 
 export default function PrivacyPolicy() {
@@ -13,6 +15,7 @@ export default function PrivacyPolicy() {
     <LegalDocumentLayout
       title="Privacy Policy"
       meta={`Effective date: ${LEGAL_EFFECTIVE_DATE} · Last updated: ${LEGAL_EFFECTIVE_DATE}`}
+      canonicalHref={PRIVACY_POLICY_PUBLIC_URL || undefined}
     >
       <section className="legal-section" aria-labelledby="p-intro">
         <h2 id="p-intro">1. Introduction and scope</h2>
@@ -50,13 +53,11 @@ export default function PrivacyPolicy() {
           </li>
           <li>
             <strong>Email:</strong>{' '}
-            <a href={SUPPORT_MAILTO}>support (see Site footer)</a>
+            <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
+              Email us
+            </a>
           </li>
         </ul>
-        <p>
-          Before publication, ensure these details match the information you provide to the Chrome Web Store and any
-          applicable regulatory filings.
-        </p>
       </section>
 
       <section className="legal-section" aria-labelledby="p-summary">
@@ -235,7 +236,9 @@ export default function PrivacyPolicy() {
         <h2 id="p-contact">16. How to contact us</h2>
         <p>
           Questions about this Policy: use the support contact published on the Site (
-          <a href={SUPPORT_MAILTO}>email</a>
+          <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
+            email
+          </a>
           ). Replace placeholders in your published configuration so users can reach a live address.
         </p>
       </section>

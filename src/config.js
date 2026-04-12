@@ -1,14 +1,59 @@
-/** Replace with your live URLs and entity details before publishing */
+/**
+ * Landing + legal on one deploy (typical for extensions)
+ * -------------------------------------------------------
+ * Privacy Policy and Terms of Service are different documents; both live on this site.
+ * - In-app links use path-only routes below (`/privacy`, `/terms`).
+ * - Chrome Web Store needs a public HTTPS Privacy Policy URL — use `PRIVACY_POLICY_PUBLIC_URL`
+ *   once `VITE_SITE_ORIGIN` matches your live domain (e.g. https://ika.design). Same origin as
+ *   this app avoids maintaining a separate “Chrome-only” legal host unless you choose to.
+ * - Terms is optional for the Store listing but normal to host alongside Privacy.
+ *
+ * Set in `.env` / hosting env: `VITE_SITE_ORIGIN=https://your.domain` (no trailing slash).
+ */
+const siteOrigin =
+  typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_ORIGIN
+    ? String(import.meta.env.VITE_SITE_ORIGIN).replace(/\/$/, '')
+    : '';
+
+/** Paste into Chrome Web Store “Privacy policy” when `VITE_SITE_ORIGIN` is set; otherwise empty. */
+export const PRIVACY_POLICY_PUBLIC_URL = siteOrigin ? `${siteOrigin}/privacy` : '';
+
+/** Optional: full Terms URL for store copy, support, or external links. */
+export const TERMS_PUBLIC_URL = siteOrigin ? `${siteOrigin}/terms` : '';
+
+/** Canonical homepage URL for `<link rel="canonical">` / sharing when `VITE_SITE_ORIGIN` is set. */
+export const SITE_HOME_URL = siteOrigin ? `${siteOrigin}/` : '';
+
+/** Product walkthrough clip under “How it works” (`public/demo/workflow-demo.mp4`). */
+export const WORKFLOW_DEMO_VIDEO_URL = `${import.meta.env.BASE_URL}demo/workflow-demo.mp4`;
 
 export const CHROME_WEB_STORE_URL =
   'https://chromewebstore.google.com/detail/...';
 
-/** In-app / SPA routes */
+/** SPA routes (React Router `<Link>`, same-origin navigation) */
 export const PRIVACY_POLICY_URL = '/privacy';
 
 export const TERMS_URL = '/terms';
 
-export const SUPPORT_MAILTO = 'mailto:support@yourdomain.com';
+/**
+ * Contact uses mailto: — it does not open a new browser tab; it hands off to the OS mail app.
+ * Embedded previews (e.g. some IDE browsers) often block mailto, so the link may appear to do nothing.
+ */
+function resolveSupportEmail() {
+  const raw =
+    typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPPORT_EMAIL != null
+      ? String(import.meta.env.VITE_SUPPORT_EMAIL).trim()
+      : '';
+  return raw.length > 0 ? raw : 'support@yourdomain.com';
+}
+
+const supportEmail = resolveSupportEmail();
+
+export const SUPPORT_MAILTO = `mailto:${supportEmail}?subject=${encodeURIComponent('Simple Screen Recorder — support')}`;
+
+/** Hover / a11y hint for mailto links */
+export const SUPPORT_MAILTO_TITLE =
+  'Opens your email app to compose a message. If nothing happens, try Chrome or Safari outside the editor preview, or set a default mail app on your device.';
 
 /** Substitute in legal pages (Privacy + Terms) */
 export const LEGAL_ENTITY_PLACEHOLDER = '[Your legal name / entity]';

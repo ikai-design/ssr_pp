@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Video,
@@ -23,35 +23,53 @@ import {
   Shield,
   Menu,
 } from 'lucide-react';
-import { CHROME_WEB_STORE_URL, PRIVACY_POLICY_URL, TERMS_URL, SUPPORT_MAILTO } from '../config';
+import {
+  CHROME_WEB_STORE_URL,
+  PRIVACY_POLICY_URL,
+  TERMS_URL,
+  SUPPORT_MAILTO,
+  SUPPORT_MAILTO_TITLE,
+  SITE_HOME_URL,
+  WORKFLOW_DEMO_VIDEO_URL,
+} from '../config';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { useCanonicalLink } from '../hooks/useCanonicalLink';
 import '../App.css';
 
 const EDITOR_HERO_SRC = `${import.meta.env.BASE_URL}chrome-editor-hero/editor-hero.html`;
 
 function FAQItem({ question, answer }) {
   const [isOpen, setIsOpen] = useState(false);
+  const panelId = useId();
+  const triggerId = useId();
 
   return (
     <div className="faq-item">
       <button
         type="button"
+        id={triggerId}
         className="faq-question"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
+        aria-controls={panelId}
       >
         {question}
         <ChevronDown
           className="faq-icon"
+          aria-hidden
           style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
           size={20}
         />
       </button>
-      {isOpen && (
-        <div className="faq-answer animate-fade-up">
-          <p>{answer}</p>
-        </div>
-      )}
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={triggerId}
+        hidden={!isOpen}
+        className={`faq-answer${isOpen ? ' animate-fade-up' : ''}`}
+      >
+        <p>{answer}</p>
+      </div>
     </div>
   );
 }
@@ -83,6 +101,12 @@ const HEADER_NAV_LINKS = [
 
 export default function LandingPage() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const menuButtonRef = useRef(null);
+  const panelRef = useRef(null);
+  const backdropRef = useRef(null);
+  const prevMobileNavOpen = useRef(false);
+
+  useCanonicalLink(SITE_HOME_URL || undefined);
 
   useEffect(() => {
     if (!mobileNavOpen) return;
@@ -109,35 +133,78 @@ export default function LandingPage() {
     };
   }, [mobileNavOpen]);
 
+  useEffect(() => {
+    if (!mobileNavOpen) return;
+    const panel = panelRef.current;
+    const backdrop = backdropRef.current;
+    const sel = 'a[href], button:not([disabled])';
+    const fromPanel = panel ? [...panel.querySelectorAll(sel)] : [];
+    const fromBackdrop = backdrop ? [backdrop] : [];
+    const focusables = [...fromPanel, ...fromBackdrop];
+    if (focusables.length === 0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    const focusFirst = () => window.requestAnimationFrame(() => first.focus());
+
+    focusFirst();
+
+    const onKeyDown = (e) => {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [mobileNavOpen]);
+
+  useEffect(() => {
+    if (prevMobileNavOpen.current && !mobileNavOpen) {
+      menuButtonRef.current?.focus();
+    }
+    prevMobileNavOpen.current = mobileNavOpen;
+  }, [mobileNavOpen]);
+
   const closeMobileNav = () => setMobileNavOpen(false);
+  const headerNavTabIndex = mobileNavOpen ? -1 : undefined;
 
   return (
     <div className="app-wrapper">
       <header className={`app-header${mobileNavOpen ? ' mobile-nav-open' : ''}`}>
         <div className="container header-container">
-          <a href={CHROME_WEB_STORE_URL} className="logo">
+          <a href={CHROME_WEB_STORE_URL} className="logo" tabIndex={headerNavTabIndex}>
             <Video size={20} className="logo-icon" aria-hidden />
             <span className="logo-text">Simple Screen Recorder</span>
           </a>
 
           <nav className="header-nav" aria-label="Sections">
             {HEADER_NAV_LINKS.map(({ href, label }) => (
-              <a key={href} href={href}>
+              <a key={href} href={href} tabIndex={headerNavTabIndex}>
                 {label}
               </a>
             ))}
           </nav>
 
           <div className="header-actions">
-            <a href={SUPPORT_MAILTO} className="header-login">
-              Contact
-            </a>
-            <a href={CHROME_WEB_STORE_URL} className="btn btn-primary btn-header-cta" target="_blank" rel="noreferrer">
+            <a
+              href={CHROME_WEB_STORE_URL}
+              className="btn btn-primary btn-header-cta"
+              target="_blank"
+              rel="noreferrer"
+              tabIndex={headerNavTabIndex}
+            >
               Add to Chrome
               <ArrowRight className="btn-icon" size={16} aria-hidden />
             </a>
             <button
               type="button"
+              ref={menuButtonRef}
               className="header-menu-toggle"
               aria-expanded={mobileNavOpen}
               aria-controls="mobile-nav"
@@ -160,6 +227,7 @@ export default function LandingPage() {
 
         <div
           id="mobile-nav"
+          ref={panelRef}
           className={`mobile-nav-panel${mobileNavOpen ? ' mobile-nav-panel--open' : ''}`}
           role="dialog"
           aria-modal="true"
@@ -172,22 +240,27 @@ export default function LandingPage() {
                 {label}
               </a>
             ))}
-            <a href={SUPPORT_MAILTO} onClick={closeMobileNav}>
-              Contact
-            </a>
             <a href={CHROME_WEB_STORE_URL} className="mobile-nav-cta" target="_blank" rel="noreferrer" onClick={closeMobileNav}>
               Add to Chrome
             </a>
           </nav>
         </div>
-        {mobileNavOpen ? <button type="button" className="mobile-nav-backdrop" aria-label="Close menu" onClick={closeMobileNav} /> : null}
+        {mobileNavOpen ? (
+          <button
+            type="button"
+            ref={backdropRef}
+            className="mobile-nav-backdrop"
+            aria-label="Close menu"
+            onClick={closeMobileNav}
+          />
+        ) : null}
       </header>
 
       <main>
         <section className="hero-section">
           <div className="container">
             <div className="hero-content animate-fade-up">
-              <p className="hero-eyebrow">Manifest V3 · Local-first export</p>
+              <p className="hero-eyebrow">Made for Chrome · Local-first export</p>
               <h1 className="heading-1 hero-title">
                 <span className="hero-title-line">Plan clearer demos with</span>
                 <span className="hero-title-line">Simple Screen Recorder</span>
@@ -305,6 +378,29 @@ export default function LandingPage() {
               </div>
             </div>
             </ScrollReveal>
+
+            <ScrollReveal>
+              <figure
+                className="workflow-demo"
+                aria-label="Video walkthrough of capture, editing, and export in Simple Screen Recorder."
+              >
+                <div className="workflow-demo-frame">
+                  <video
+                    className="workflow-demo-video"
+                    src={WORKFLOW_DEMO_VIDEO_URL}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls
+                    preload="metadata"
+                  />
+                </div>
+                <figcaption className="workflow-demo-caption text-body">
+                  Short walkthrough: record, refine on the timeline, export locally.
+                </figcaption>
+              </figure>
+            </ScrollReveal>
           </div>
         </section>
 
@@ -319,97 +415,112 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              <div className="comparison-container">
-              <div className="comparison-row comparison-header">
-                <div className="comparison-feature comparison-header-feature">Features</div>
-                <div className="comparison-pair comparison-pair--header">
-                  <div className="comparison-col comparison-col-muted comparison-col-stack">
-                    <span className="comparison-col-title">Basic recorder</span>
-                    <span className="comparison-col-note">Pricing varies</span>
-                  </div>
-                  <div className="comparison-col comparison-col-brand comparison-col-stack">
-                    <span className="comparison-col-title comparison-col-title--brand">Simple Screen Recorder</span>
-                    <span className="comparison-col-note comparison-col-note--free">Free</span>
-                  </div>
-                </div>
+              <div className="comparison-table-wrap">
+                <table className="comparison-table">
+                  <caption className="visually-hidden">
+                    Comparison of features for a basic screen recorder versus Simple Screen Recorder
+                  </caption>
+                  <thead>
+                    <tr className="comparison-table__head-row">
+                      <th scope="col" className="comparison-th-feature comparison-header-feature">
+                        Features
+                      </th>
+                      <th scope="col" className="comparison-th-basic comparison-col-muted">
+                        <span className="comparison-col comparison-col-stack">
+                          <span className="comparison-col-title">Basic recorder</span>
+                          <span className="comparison-col-note">Pricing varies</span>
+                        </span>
+                      </th>
+                      <th scope="col" className="comparison-th-brand comparison-col-brand">
+                        <span className="comparison-col comparison-col-stack">
+                          <span className="comparison-col-title comparison-col-title--brand">
+                            Simple Screen Recorder
+                          </span>
+                          <span className="comparison-col-note comparison-col-note--free">Free</span>
+                        </span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Zoom-to-cursor storytelling
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <X className="icon-x" size={18} aria-hidden />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Timeline (trim / zoom blocks)
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <X className="icon-x" size={18} aria-hidden />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Local MP4 without cloud for core path
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <Minus className="icon-varies" size={18} aria-label="Varies" />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Backgrounds &amp; aspect presets
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <X className="icon-x" size={18} aria-hidden />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <div className="comparison-row">
-                <div className="comparison-feature">Zoom-to-cursor storytelling</div>
-                <div className="comparison-pair">
-                  <div className="comparison-side">
-                    <span className="comparison-side-label">
-                      <span className="comparison-side-label-line">Basic recorder</span>
-                      <span className="comparison-side-label-note">Pricing varies</span>
-                    </span>
-                    <X className="icon-x" size={18} aria-hidden />
-                  </div>
-                  <div className="comparison-side">
-                    <span className="comparison-side-label">
-                      <span className="comparison-side-label-line">Simple Screen Recorder</span>
-                      <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
-                    </span>
-                    <Check className="icon-check" size={18} aria-hidden />
-                  </div>
-                </div>
-              </div>
-              <div className="comparison-row">
-                <div className="comparison-feature">Timeline (trim / zoom blocks)</div>
-                <div className="comparison-pair">
-                  <div className="comparison-side">
-                    <span className="comparison-side-label">
-                      <span className="comparison-side-label-line">Basic recorder</span>
-                      <span className="comparison-side-label-note">Pricing varies</span>
-                    </span>
-                    <X className="icon-x" size={18} aria-hidden />
-                  </div>
-                  <div className="comparison-side">
-                    <span className="comparison-side-label">
-                      <span className="comparison-side-label-line">Simple Screen Recorder</span>
-                      <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
-                    </span>
-                    <Check className="icon-check" size={18} aria-hidden />
-                  </div>
-                </div>
-              </div>
-              <div className="comparison-row">
-                <div className="comparison-feature">Local MP4 without cloud for core path</div>
-                <div className="comparison-pair">
-                  <div className="comparison-side">
-                    <span className="comparison-side-label">
-                      <span className="comparison-side-label-line">Basic recorder</span>
-                      <span className="comparison-side-label-note">Pricing varies</span>
-                    </span>
-                    <Minus className="icon-varies" size={18} aria-label="Varies" />
-                  </div>
-                  <div className="comparison-side">
-                    <span className="comparison-side-label">
-                      <span className="comparison-side-label-line">Simple Screen Recorder</span>
-                      <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
-                    </span>
-                    <Check className="icon-check" size={18} aria-hidden />
-                  </div>
-                </div>
-              </div>
-              <div className="comparison-row">
-                <div className="comparison-feature">Backgrounds &amp; aspect presets</div>
-                <div className="comparison-pair">
-                  <div className="comparison-side">
-                    <span className="comparison-side-label">
-                      <span className="comparison-side-label-line">Basic recorder</span>
-                      <span className="comparison-side-label-note">Pricing varies</span>
-                    </span>
-                    <X className="icon-x" size={18} aria-hidden />
-                  </div>
-                  <div className="comparison-side">
-                    <span className="comparison-side-label">
-                      <span className="comparison-side-label-line">Simple Screen Recorder</span>
-                      <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
-                    </span>
-                    <Check className="icon-check" size={18} aria-hidden />
-                  </div>
-                </div>
-              </div>
-            </div>
             </ScrollReveal>
           </div>
         </section>
@@ -524,7 +635,9 @@ export default function LandingPage() {
             <a href={CHROME_WEB_STORE_URL} target="_blank" rel="noreferrer">
               Chrome Web Store
             </a>
-            <a href={SUPPORT_MAILTO}>Support</a>
+            <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
+              Contact
+            </a>
             <Link to={PRIVACY_POLICY_URL}>Privacy</Link>
             <Link to={TERMS_URL}>Terms</Link>
           </div>

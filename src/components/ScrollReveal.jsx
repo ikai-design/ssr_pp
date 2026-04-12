@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 
+function prefersReducedMotion() {
+  if (typeof window === 'undefined') return false;
+  return Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+}
+
 /** Fades/slides content in once when it enters the viewport (subtle motion). */
-export function ScrollReveal({ children, className = '', delayMs = 0, as: Tag = 'div', ...rest }) {
+export function ScrollReveal({ children, className = '', delayMs = 0 }) {
   const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(prefersReducedMotion);
 
   useEffect(() => {
+    if (visible) return;
     const el = ref.current;
     if (!el) return;
-
-    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
-      setVisible(true);
-      return;
-    }
 
     const ob = new IntersectionObserver(
       ([entry]) => {
@@ -25,7 +26,7 @@ export function ScrollReveal({ children, className = '', delayMs = 0, as: Tag = 
     );
     ob.observe(el);
     return () => ob.disconnect();
-  }, []);
+  }, [visible]);
 
   const combined = [
     'reveal-on-scroll',
@@ -38,8 +39,8 @@ export function ScrollReveal({ children, className = '', delayMs = 0, as: Tag = 
   const style = delayMs > 0 ? { transitionDelay: `${delayMs}ms` } : undefined;
 
   return (
-    <Tag ref={ref} className={combined} style={style} {...rest}>
+    <div ref={ref} className={combined} style={style}>
       {children}
-    </Tag>
+    </div>
   );
 }

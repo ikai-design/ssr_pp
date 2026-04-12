@@ -266,3 +266,17 @@
   margin-right: 0.15rem;
   opacity: 0.9;
 }
+
+.error-footer-contact {
+  margin-top: 1.5rem;
+  font-size: 0.9375rem;
+}
+
+.error-footer-contact a {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.error-footer-contact a:hover {
+  color: var(--text-primary);
+}
