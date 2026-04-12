@@ -266,8 +266,8 @@ export default function LandingPage() {
                 <span className="hero-title-line">Simple Screen Recorder</span>
               </h1>
               <p className="subhead hero-subhead">
-                Record your browser with smooth zoom-to-cursor, edit in a timeline, and export WebM or MP4 on your
-                machine—no upload for the default workflow.
+                For tab capture, a click starts smooth zoom-to-cursor (movement steers the frame while zoomed); edit in a
+                timeline and export WebM or MP4 on your machine—no upload for the default workflow.
               </p>
               <div className="hero-btns">
                 <a href={CHROME_WEB_STORE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
@@ -309,7 +309,10 @@ export default function LandingPage() {
               <div className="feature-card">
                 <MousePointer2 className="feature-icon" size={22} aria-hidden />
                 <h3 className="feature-title">Smooth zoom-to-cursor</h3>
-                <p className="feature-desc text-body">Guide attention while you navigate; tuned for tab capture.</p>
+                <p className="feature-desc text-body">
+                  Click to zoom in on a tab recording, then pan with the cursor; best on tab capture (screen/window uses
+                  the capture as-is).
+                </p>
               </div>
               <div className="feature-card">
                 <Video className="feature-icon" size={22} aria-hidden />
@@ -367,7 +370,10 @@ export default function LandingPage() {
                   <Wand2 size={22} aria-hidden />
                 </div>
                 <h3 className="heading-3">2. Record your flow</h3>
-                <p className="text-body">Smooth motion; interactions can inform zoom for the timeline.</p>
+                <p className="text-body">
+                  On a tab, clicks drive zoom and optional cursor overlay data for the editor; on screen/window, you get
+                  the capture you picked.
+                </p>
               </div>
               <div className="step-card">
                 <div className="step-icon">
@@ -585,6 +591,14 @@ export default function LandingPage() {
               <FAQItem
                 question="Will this work on any website?"
                 answer="Normal pages yes. Restricted Chrome URLs (e.g. chrome://) can’t be recorded, like other capture tools."
+              />
+              <FAQItem
+                question="Tab vs screen recording—what’s different?"
+                answer="Tab capture enables click-based zoom and optional cursor overlay in the editor. Window or full-screen capture does not include page-level click/mouse data, so those enhancements are for tab workflows."
+              />
+              <FAQItem
+                question="Which Chrome version do I need?"
+                answer="Chrome 116 or newer (Manifest V3 features the extension relies on)."
               />
               <FAQItem
                 question="Why WebM?"

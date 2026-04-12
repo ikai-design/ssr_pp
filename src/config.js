@@ -27,6 +27,7 @@ export const SITE_HOME_URL = siteOrigin ? `${siteOrigin}/` : '';
 /** Product walkthrough clip under “How it works” (`public/demo/workflow-demo.mp4`). */
 export const WORKFLOW_DEMO_VIDEO_URL = `${import.meta.env.BASE_URL}demo/workflow-demo.mp4`;
 
+/** Set to your public listing URL when the extension is live in the Chrome Web Store. */
 export const CHROME_WEB_STORE_URL =
   'https://chromewebstore.google.com/detail/...';
 
@@ -44,22 +45,26 @@ function resolveSupportEmail() {
     typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPPORT_EMAIL != null
       ? String(import.meta.env.VITE_SUPPORT_EMAIL).trim()
       : '';
-  return raw.length > 0 ? raw : 'support@yourdomain.com';
+  return raw.length > 0 ? raw : 'info@simple-screen-recorder.com';
 }
 
-const supportEmail = resolveSupportEmail();
+/** Resolved support address (same as used in mailto links). */
+export const SUPPORT_EMAIL = resolveSupportEmail();
 
-export const SUPPORT_MAILTO = `mailto:${supportEmail}?subject=${encodeURIComponent('Simple Screen Recorder — support')}`;
+export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('Simple Screen Recorder — support')}`;
 
 /** Hover / a11y hint for mailto links */
 export const SUPPORT_MAILTO_TITLE =
   'Opens your email app to compose a message. If nothing happens, try Chrome or Safari outside the editor preview, or set a default mail app on your device.';
 
 /** Substitute in legal pages (Privacy + Terms) */
-export const LEGAL_ENTITY_PLACEHOLDER = '[Your legal name / entity]';
+export const LEGAL_ENTITY_PLACEHOLDER = 'ikai design';
 
-export const LEGAL_ADDRESS_PLACEHOLDER = '[Registered business address]';
+export const LEGAL_ADDRESS_PLACEHOLDER = 'Pekelharingstraat 7-2, Amsterdam, Netherlands';
 
-export const LEGAL_JURISDICTION_PLACEHOLDER = '[State/Country — e.g., Delaware, USA]';
+/** Netherlands Chamber of Commerce (Kamer van Koophandel) — hoofdvestiging */
+export const LEGAL_KVK_NUMBER = '94307393';
 
-export const LEGAL_EFFECTIVE_DATE = '5 April 2026';
+export const LEGAL_JURISDICTION_PLACEHOLDER = 'the Netherlands';
+
+export const LEGAL_EFFECTIVE_DATE = '11 April 2026';

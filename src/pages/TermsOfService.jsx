@@ -3,6 +3,7 @@ import LegalDocumentLayout from '../components/LegalDocumentLayout';
 import {
   LEGAL_ENTITY_PLACEHOLDER,
   LEGAL_ADDRESS_PLACEHOLDER,
+  LEGAL_KVK_NUMBER,
   LEGAL_JURISDICTION_PLACEHOLDER,
   LEGAL_EFFECTIVE_DATE,
   PRIVACY_POLICY_URL,
@@ -194,6 +195,10 @@ export default function TermsOfService() {
             support contact on the Site
           </a>
           .
+        </p>
+        <p>
+          <strong>Operator:</strong> {LEGAL_ENTITY_PLACEHOLDER}, {LEGAL_ADDRESS_PLACEHOLDER}.{' '}
+          <strong>KVK:</strong> {LEGAL_KVK_NUMBER}.
         </p>
       </section>
     </LegalDocumentLayout>

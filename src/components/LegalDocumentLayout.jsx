@@ -1,7 +1,14 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Video, ArrowRight, ArrowLeft } from 'lucide-react';
-import { CHROME_WEB_STORE_URL, PRIVACY_POLICY_URL, TERMS_URL, SUPPORT_MAILTO, SUPPORT_MAILTO_TITLE } from '../config';
+import {
+  CHROME_WEB_STORE_URL,
+  PRIVACY_POLICY_URL,
+  TERMS_URL,
+  SUPPORT_EMAIL,
+  SUPPORT_MAILTO,
+  SUPPORT_MAILTO_TITLE,
+} from '../config';
 import { useCanonicalLink } from '../hooks/useCanonicalLink';
 import '../App.css';
 import '../legal.css';
@@ -57,7 +64,7 @@ export default function LegalDocumentLayout({ title, meta, canonicalHref, childr
               Back to home
             </Link>
             <div className="legal-footer-links">
-              <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
+              <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE} aria-label={`Email ${SUPPORT_EMAIL}`}>
                 Contact
               </a>
               <Link to={PRIVACY_POLICY_URL}>Privacy</Link>

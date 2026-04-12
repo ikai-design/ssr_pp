@@ -3,8 +3,10 @@ import LegalDocumentLayout from '../components/LegalDocumentLayout';
 import {
   LEGAL_ENTITY_PLACEHOLDER,
   LEGAL_ADDRESS_PLACEHOLDER,
+  LEGAL_KVK_NUMBER,
   LEGAL_EFFECTIVE_DATE,
   TERMS_URL,
+  SUPPORT_EMAIL,
   SUPPORT_MAILTO,
   SUPPORT_MAILTO_TITLE,
   PRIVACY_POLICY_PUBLIC_URL,
@@ -52,9 +54,12 @@ export default function PrivacyPolicy() {
             <strong>Address:</strong> {LEGAL_ADDRESS_PLACEHOLDER}
           </li>
           <li>
+            <strong>KVK:</strong> {LEGAL_KVK_NUMBER} (Netherlands Chamber of Commerce)
+          </li>
+          <li>
             <strong>Email:</strong>{' '}
             <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
-              Email us
+              {SUPPORT_EMAIL}
             </a>
           </li>
         </ul>
@@ -101,8 +106,16 @@ export default function PrivacyPolicy() {
       </section>
 
       <section className="legal-section" aria-labelledby="p-purposes">
-        <h2 id="p-purposes">5. Purposes and legal bases (EEA/UK reference)</h2>
-        <p>Where the EU or UK General Data Protection Regulation applies, we rely on one or more of the following:</p>
+        <h2 id="p-purposes">5. Purposes and legal bases (EEA, UK, and Netherlands)</h2>
+        <p>
+          Where the <strong>General Data Protection Regulation (EU) 2016/679 (&quot;GDPR&quot;)</strong> applies —
+          including when you are in the <strong>Netherlands</strong> or elsewhere in the{' '}
+          <strong>European Economic Area (EEA)</strong> — we process personal data on the bases listed below. In the
+          Netherlands, the GDPR is supplemented by national rules, including the <strong>Uitvoeringswet AVG</strong>{' '}
+          (Dutch GDPR implementation act) where relevant to enforcement and procedural aspects.
+        </p>
+        <p>Where the UK GDPR applies, we rely on comparable lawful bases under UK law.</p>
+        <p>We rely on one or more of the following:</p>
         <ul>
           <li>
             <strong>Performance of a contract</strong> or pre-contractual steps (responding to your inquiries).
@@ -118,6 +131,12 @@ export default function PrivacyPolicy() {
             <strong>Legal obligation</strong> (tax, compliance, court orders).
           </li>
         </ul>
+        <p>
+          <strong>Processors.</strong> Where we use hosting, email, analytics, or similar providers, they act as{' '}
+          <strong>processors</strong> on our instructions under Article 28 GDPR (or equivalent UK rules), unless they
+          determine purposes and means as a separate controller (for example, Google for Chrome Web Store account
+          processes).
+        </p>
       </section>
 
       <section className="legal-section" aria-labelledby="p-local">
@@ -186,23 +205,39 @@ export default function PrivacyPolicy() {
       <section className="legal-section" aria-labelledby="p-transfers">
         <h2 id="p-transfers">11. International transfers</h2>
         <p>
-          If you access the Services from outside the country where we operate, your information may be transferred
-          across borders. Where required, we implement appropriate safeguards (such as Standard Contractual Clauses).
-          Contact us for more detail.
+          If you access the Services from outside the country where we operate, your information may be transferred across
+          borders. For transfers from the EEA (including the Netherlands) or the UK to countries not subject to an{' '}
+          <strong>adequacy decision</strong>, we use appropriate safeguards under GDPR Chapter V / UK GDPR (for example,{' '}
+          <strong>Standard Contractual Clauses</strong> approved by the European Commission or UK ICO, plus supplementary
+          measures where required). Contact us for more detail on transfers relevant to you.
         </p>
       </section>
 
       <section className="legal-section" aria-labelledby="p-rights">
         <h2 id="p-rights">12. Your privacy rights</h2>
         <p>
-          Depending on your location, you may have the right to access, rectify, delete, restrict, or port personal data
-          we hold, and to object to certain processing. You may also lodge a complaint with a supervisory authority. To
-          exercise rights, contact us using the details above. We may verify your request as permitted by law.
+          Depending on your location, you may have the right of <strong>access</strong>, <strong>rectification</strong>,{' '}
+          <strong>erasure</strong>, <strong>restriction</strong> of processing, <strong>data portability</strong>, and to{' '}
+          <strong>object</strong> to certain processing, including in some contexts to object to processing based on
+          legitimate interests. Where processing is based on consent, you may <strong>withdraw consent</strong> at any
+          time without affecting the lawfulness of processing before withdrawal. To exercise rights, contact us using the
+          email in Section 2. We may verify your request as permitted by law.
+        </p>
+        <p>
+          <strong>Netherlands and EEA.</strong> If you are in the Netherlands or another EEA country, you also have the
+          right to lodge a complaint with a <strong>supervisory authority</strong>. The Dutch supervisory authority is the{' '}
+          <strong>Autoriteit Persoonsgegevens (AP)</strong>, Postbus 93374, 2509 AJ Den Haag, Netherlands —{' '}
+          <a href="https://www.autoriteitpersoonsgegevens.nl">autoriteitpersoonsgegevens.nl</a>. You may instead contact the
+          supervisory authority in your habitual residence or place of work.
+        </p>
+        <p>
+          <strong>Automated decision-making (Article 22 GDPR).</strong> We do not make decisions based solely on automated
+          processing, including profiling, which produce legal or similarly significant effects concerning you.
         </p>
         <p>
           <strong>California.</strong> California residents may have additional rights under the CCPA/CPRA (including
-          knowing, deleting, and opting out of certain sharing). We describe our practices in this Policy; submit
-          requests via the contact channel on the Site.
+          knowing, deleting, and opting out of certain sharing). We describe our practices in this Policy; submit requests
+          via the contact channel on the Site.
         </p>
       </section>
 
@@ -235,11 +270,11 @@ export default function PrivacyPolicy() {
       <section className="legal-section" aria-labelledby="p-contact">
         <h2 id="p-contact">16. How to contact us</h2>
         <p>
-          Questions about this Policy: use the support contact published on the Site (
+          Questions about this Policy or your personal data:{' '}
           <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
-            email
+            contact us by email
           </a>
-          ). Replace placeholders in your published configuration so users can reach a live address.
+          .
         </p>
       </section>
     </LegalDocumentLayout>
