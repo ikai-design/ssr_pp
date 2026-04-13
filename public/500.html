@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
     <meta name="color-scheme" content="light" />
     <meta name="theme-color" content="#f9f9f9" />
     <title>Server error | Simple Screen Recorder</title>
@@ -55,20 +56,52 @@
         margin-bottom: 1.5rem;
         font-size: 1rem;
       }
-      a {
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+      a.btn,
+      button.btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         padding: 0.75rem 1.5rem;
-        background: #000;
-        color: #fff;
         text-decoration: none;
         border-radius: 9999px;
         font-weight: 500;
         font-size: 0.9rem;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
       }
-      a:hover {
+      a.btn-primary {
+        background: #000;
+        color: #fff;
+      }
+      a.btn-primary:hover {
         background: #27272a;
+      }
+      button.btn-secondary {
+        background: #fff;
+        color: #18181b;
+        border: 1px solid #e4e4e7;
+      }
+      button.btn-secondary:hover {
+        background: #f4f4f5;
+      }
+      .footer-contact {
+        font-size: 0.9375rem;
+      }
+      .footer-contact a {
+        color: #52525b;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .footer-contact a:hover {
+        color: #18181b;
       }
     </style>
   </head>
@@ -76,9 +109,19 @@
     <div class="code" aria-hidden="true">500</div>
     <h1>Something went wrong</h1>
     <p>
-      The server couldn’t complete your request. Please wait a moment and try again. If the problem continues, contact
-      the site operator.
+      We couldn’t complete that request. Please try again in a few moments. If the problem continues, contact support with
+      what you were trying to do.
     </p>
-    <a href="/">Back to home</a>
+    <div class="actions">
+      <a class="btn btn-primary" href="/">Back to home</a>
+      <button type="button" class="btn btn-secondary" onclick="location.reload()">Reload page</button>
+    </div>
+    <p class="footer-contact">
+      <a
+        href="mailto:info@simple-screen-recorder.com?subject=Simple%20Screen%20Recorder%20%E2%80%94%20support"
+        title="Opens your email app to compose a message."
+        >Contact</a
+      >
+    </p>
   </body>
 </html>

@@ -7,7 +7,7 @@ import '../legal.css';
 
 const DEFAULT_TITLE = 'Simple Screen Recorder | Chrome screen recorder with zoom & local export';
 
-export default function ErrorShell({ code, title, description, documentTitle }) {
+export default function ErrorShell({ code, title, description, documentTitle, showReload = false }) {
   useEffect(() => {
     document.title = documentTitle;
     window.scrollTo(0, 0);
@@ -15,6 +15,16 @@ export default function ErrorShell({ code, title, description, documentTitle }) 
       document.title = DEFAULT_TITLE;
     };
   }, [documentTitle]);
+
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex, nofollow';
+    document.head.appendChild(meta);
+    return () => {
+      meta.remove();
+    };
+  }, []);
 
   return (
     <div className="error-page">
@@ -49,6 +59,11 @@ export default function ErrorShell({ code, title, description, documentTitle }) 
             <ArrowLeft size={18} className="error-btn-home-icon" aria-hidden />
             Back to home
           </Link>
+          {showReload ? (
+            <button type="button" className="btn btn-secondary" onClick={() => window.location.reload()}>
+              Reload page
+            </button>
+          ) : null}
         </div>
         <p className="error-footer-contact">
           <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE} aria-label={`Email ${SUPPORT_EMAIL}`}>

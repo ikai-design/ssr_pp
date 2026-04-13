@@ -7,6 +7,7 @@ export default function ServerError() {
       title="Something went wrong"
       description="We couldn’t complete that request. Please try again in a few moments. If the problem continues, contact support with what you were trying to do."
       documentTitle="Server error | Simple Screen Recorder"
+      showReload
     />
   );
 }

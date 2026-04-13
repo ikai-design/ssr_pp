@@ -78,7 +78,7 @@ function HeroMockup() {
   return (
     <figure
       className="hero-preview animate-fade-up delay-100"
-      aria-label="Simple Screen Recorder editor: preview area, timeline with trim and zoom blocks, and export controls (static snapshot from the extension UI)."
+      aria-label="Simple Screen Recorder editor: preview with optional browser frame, timeline with trim and zoom blocks, and export controls (static snapshot from the extension UI)."
     >
       <div className="hero-preview-frame hero-preview-frame--plugin">
         <iframe
@@ -278,8 +278,9 @@ export default function LandingPage() {
                 <span className="hero-title-line">Simple Screen Recorder</span>
               </h1>
               <p className="subhead hero-subhead">
-                For tab capture, a click starts smooth zoom-to-cursor (movement steers the frame while zoomed); edit in a
-                timeline and export WebM or MP4 on your machine—no upload for the default workflow.
+                On a tab, click to zoom in smoothly and pan with the cursor—after a few seconds idle, zoom eases back to
+                full frame. Add browser-style frames and backgrounds in the editor, refine the timeline, then export WebM or
+                MP4 locally—no upload for the default workflow.
               </p>
               <div className="hero-btns">
                 <a href={CHROME_WEB_STORE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
@@ -313,7 +314,7 @@ export default function LandingPage() {
               <div className="section-header">
                 <h2 className="heading-2">What you get</h2>
                 <p className="subhead section-lead">
-                  Zoom storytelling, a real editor, and local export—not just a single raw capture.
+                  Click-to-zoom storytelling, browser frames, a real timeline, and local export—not just a single raw capture.
                 </p>
               </div>
 
@@ -322,14 +323,17 @@ export default function LandingPage() {
                 <MousePointer2 className="feature-icon" size={22} aria-hidden />
                 <h3 className="feature-title">Smooth zoom-to-cursor</h3>
                 <p className="feature-desc text-body">
-                  Click to zoom in on a tab recording, then pan with the cursor; best on tab capture (screen/window uses
-                  the capture as-is).
+                  On tab capture, click to zoom in and follow the cursor while zoomed; after a short idle period, zoom
+                  returns to the full frame. Screen or window capture stays as picked—no page-level zoom cues.
                 </p>
               </div>
               <div className="feature-card">
                 <Video className="feature-icon" size={22} aria-hidden />
-                <h3 className="feature-title">Click-aware workflow</h3>
-                <p className="feature-desc text-body">Clicks can drive zoom moments on the timeline.</p>
+                <h3 className="feature-title">Clicks become zoom blocks</h3>
+                <p className="feature-desc text-body">
+                  Each recorded click spawns a zoom segment on the timeline with position and depth you can tweak—plus
+                  auto-zoom depth presets when you want every click to match.
+                </p>
               </div>
               <div className="feature-card">
                 <Scissors className="feature-icon" size={22} aria-hidden />
@@ -340,8 +344,11 @@ export default function LandingPage() {
               </div>
               <div className="feature-card">
                 <Layers className="feature-icon" size={22} aria-hidden />
-                <h3 className="feature-title">Framing &amp; aspect presets</h3>
-                <p className="feature-desc text-body">Backgrounds and ratios suited for Slack, docs, or social.</p>
+                <h3 className="feature-title">Browser frames &amp; stage</h3>
+                <p className="feature-desc text-body">
+                  Optional window-style browser chrome (default or minimal), shadows and borders, gradients or solid
+                  fills, custom image backgrounds, and aspect presets for Slack, docs, or social.
+                </p>
               </div>
               <div className="feature-card">
                 <HardDrive className="feature-icon" size={22} aria-hidden />
@@ -353,8 +360,11 @@ export default function LandingPage() {
               </div>
               <div className="feature-card">
                 <Keyboard className="feature-icon" size={22} aria-hidden />
-                <h3 className="feature-title">Shortcut to stop</h3>
-                <p className="feature-desc text-body">Ctrl+Shift+E (Windows/Linux) or ⌘+Shift+E (macOS).</p>
+                <h3 className="feature-title">Pause &amp; shortcut</h3>
+                <p className="feature-desc text-body">
+                  Pause and resume while recording when you need a break. Stop quickly with Ctrl+Shift+E (Windows/Linux)
+                  or ⌘+Shift+E (macOS).
+                </p>
               </div>
             </div>
             </ScrollReveal>
@@ -384,7 +394,7 @@ export default function LandingPage() {
                 <h3 className="heading-3">2. Record your flow</h3>
                 <p className="text-body">
                   On a tab, clicks drive zoom and optional cursor overlay data for the editor; on screen/window, you get
-                  the capture you picked.
+                  the capture you picked. Pause and resume anytime if you need to step away.
                 </p>
               </div>
               <div className="step-card">
@@ -392,7 +402,10 @@ export default function LandingPage() {
                   <Download size={22} aria-hidden />
                 </div>
                 <h3 className="heading-3">3. Polish &amp; export</h3>
-                <p className="text-body">Adjust the timeline, set export options, download locally from the editor tab.</p>
+                <p className="text-body">
+                  Trim and tune zoom blocks, pick a browser frame and background, set quality and format, then download
+                  locally from the editor tab.
+                </p>
               </div>
             </div>
             </ScrollReveal>
@@ -415,7 +428,7 @@ export default function LandingPage() {
                   />
                 </div>
                 <figcaption className="workflow-demo-caption text-body">
-                  Short walkthrough: record, refine on the timeline, export locally.
+                  Short walkthrough: record (pause if needed), frame and polish on the timeline, export locally.
                 </figcaption>
               </figure>
             </ScrollReveal>
@@ -536,6 +549,44 @@ export default function LandingPage() {
                         <Check className="icon-check" size={18} aria-hidden />
                       </td>
                     </tr>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Browser chrome / window frame
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <X className="icon-x" size={18} aria-hidden />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Pause / resume while recording
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <Minus className="icon-varies" size={18} aria-label="Varies" />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -581,9 +632,10 @@ export default function LandingPage() {
               <Shield size={36} className="trust-icon" aria-hidden />
               <h2 className="heading-2 trust-title">Privacy</h2>
               <p className="text-body trust-copy">
-                Recordings are processed on your device for export in the default workflow. The extension uses standard
-                Chrome permissions to capture content and a lightweight pointer tracker on pages you record—so zoom stays
-                accurate. Host access is for recording eligible sites, not for ad-style browsing history collection.
+                Recordings, optional custom background images, and exports are processed on your device in the default
+                workflow. The extension uses standard Chrome permissions to capture content and a lightweight pointer tracker
+                on pages you record—so zoom stays accurate. Host access is for recording eligible sites, not for ad-style
+                browsing history collection.
               </p>
               <Link to={PRIVACY_POLICY_URL} className="trust-link">
                 Privacy policy
@@ -607,6 +659,14 @@ export default function LandingPage() {
               <FAQItem
                 question="Tab vs screen recording—what’s different?"
                 answer="Tab capture enables click-based zoom and optional cursor overlay in the editor. Window or full-screen capture does not include page-level click/mouse data, so those enhancements are for tab workflows."
+              />
+              <FAQItem
+                question="How does zoom work on a tab recording?"
+                answer="Click to zoom in smoothly; move the cursor to pan while zoomed. If you stop moving for a few seconds, zoom eases back to the full frame. Your clicks also become zoom segments on the timeline you can trim and tune before export."
+              />
+              <FAQItem
+                question="What about audio—and can I mute while recording?"
+                answer="Tab capture can include audio from the tab. Screen or window capture may not include system audio on every OS (for example, macOS often has no display audio in the recording). When audio is available, you can mute and unmute during capture from the controls."
               />
               <FAQItem
                 question="Which Chrome version do I need?"
