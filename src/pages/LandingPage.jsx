@@ -1,5 +1,5 @@
 import { useState, useEffect, useId, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Video,
   MousePointer2,
@@ -100,6 +100,7 @@ const HEADER_NAV_LINKS = [
 ];
 
 export default function LandingPage() {
+  const location = useLocation();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const menuButtonRef = useRef(null);
   const panelRef = useRef(null);
@@ -174,14 +175,25 @@ export default function LandingPage() {
   const closeMobileNav = () => setMobileNavOpen(false);
   const headerNavTabIndex = mobileNavOpen ? -1 : undefined;
 
+  const handleLogoClick = (e) => {
+    closeMobileNav();
+    if (location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (location.hash) {
+        window.history.replaceState(null, '', '/');
+      }
+    }
+  };
+
   return (
     <div className="app-wrapper">
       <header className={`app-header${mobileNavOpen ? ' mobile-nav-open' : ''}`}>
         <div className="container header-container">
-          <a href={CHROME_WEB_STORE_URL} className="logo" tabIndex={headerNavTabIndex}>
+          <Link to="/" className="logo" tabIndex={headerNavTabIndex} onClick={handleLogoClick}>
             <Video size={20} className="logo-icon" aria-hidden />
             <span className="logo-text">Simple Screen Recorder</span>
-          </a>
+          </Link>
 
           <nav className="header-nav" aria-label="Sections">
             {HEADER_NAV_LINKS.map(({ href, label }) => (
