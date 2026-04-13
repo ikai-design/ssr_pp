@@ -15,6 +15,9 @@ const siteOrigin =
     ? String(import.meta.env.VITE_SITE_ORIGIN).replace(/\/$/, '')
     : '';
 
+/** Public site origin without trailing slash (empty in dev unless `VITE_SITE_ORIGIN` is set). */
+export const SITE_PUBLIC_ORIGIN = siteOrigin;
+
 /** Paste into Chrome Web Store “Privacy policy” when `VITE_SITE_ORIGIN` is set; otherwise empty. */
 export const PRIVACY_POLICY_PUBLIC_URL = siteOrigin ? `${siteOrigin}/privacy` : '';
 
@@ -61,6 +64,13 @@ export const SUPPORT_MAILTO_TITLE =
 export const LEGAL_ENTITY_PLACEHOLDER = 'ikai design';
 
 export const LEGAL_ADDRESS_PLACEHOLDER = 'Pekelharingstraat 7-2, Amsterdam, Netherlands';
+
+/** Structured address for JSON-LD / schema.org (keep aligned with legal copy). */
+export const ORGANIZATION_POSTAL = {
+  streetAddress: 'Pekelharingstraat 7-2',
+  addressLocality: 'Amsterdam',
+  addressCountry: 'NL',
+};
 
 /** Netherlands Chamber of Commerce (Kamer van Koophandel) — hoofdvestiging */
 export const LEGAL_KVK_NUMBER = '94307393';

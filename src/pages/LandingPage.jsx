@@ -30,8 +30,13 @@ import {
   SUPPORT_MAILTO,
   SUPPORT_MAILTO_TITLE,
   SITE_HOME_URL,
+  SITE_PUBLIC_ORIGIN,
   WORKFLOW_DEMO_VIDEO_URL,
+  LEGAL_ENTITY_PLACEHOLDER,
+  ORGANIZATION_POSTAL,
 } from '../config';
+import { LANDING_FAQ_ITEMS } from '../content/landingFaq';
+import { buildLandingJsonLd } from '../seo/landingJsonLd';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { useCanonicalLink } from '../hooks/useCanonicalLink';
 import '../App.css';
@@ -108,6 +113,28 @@ export default function LandingPage() {
   const prevMobileNavOpen = useRef(false);
 
   useCanonicalLink(SITE_HOME_URL || undefined);
+
+  useEffect(() => {
+    if (!SITE_PUBLIC_ORIGIN) return;
+    const id = 'landing-json-ld';
+    let el = document.getElementById(id);
+    if (!el) {
+      el = document.createElement('script');
+      el.type = 'application/ld+json';
+      el.id = id;
+      document.head.appendChild(el);
+    }
+    const data = buildLandingJsonLd({
+      siteOrigin: SITE_PUBLIC_ORIGIN,
+      storeUrl: CHROME_WEB_STORE_URL,
+      publisherName: LEGAL_ENTITY_PLACEHOLDER,
+      ...ORGANIZATION_POSTAL,
+    });
+    el.textContent = JSON.stringify(data);
+    return () => {
+      el?.remove();
+    };
+  }, []);
 
   useEffect(() => {
     if (!mobileNavOpen) return;
@@ -268,7 +295,7 @@ export default function LandingPage() {
         ) : null}
       </header>
 
-      <main>
+      <main id="main-content">
         <section className="hero-section">
           <div className="container">
             <div className="hero-content animate-fade-up">
@@ -652,47 +679,10 @@ export default function LandingPage() {
                 <h2 className="heading-2">FAQ</h2>
               </div>
               <div className="faq-container">
-              <FAQItem
-                question="Will this work on any website?"
-                answer="Normal pages yes. Restricted Chrome URLs (e.g. chrome://) can’t be recorded, like other capture tools."
-              />
-              <FAQItem
-                question="Tab vs screen recording—what’s different?"
-                answer="Tab capture enables click-based zoom and optional cursor overlay in the editor. Window or full-screen capture does not include page-level click/mouse data, so those enhancements are for tab workflows."
-              />
-              <FAQItem
-                question="How does zoom work on a tab recording?"
-                answer="Click to zoom in smoothly; move the cursor to pan while zoomed. If you stop moving for a few seconds, zoom eases back to the full frame. Your clicks also become zoom segments on the timeline you can trim and tune before export."
-              />
-              <FAQItem
-                question="What about audio—and can I mute while recording?"
-                answer="Tab capture can include audio from the tab. Screen or window capture may not include system audio on every OS (for example, macOS often has no display audio in the recording). When audio is available, you can mute and unmute during capture from the controls."
-              />
-              <FAQItem
-                question="Which Chrome version do I need?"
-                answer="Chrome 116 or newer (Manifest V3 features the extension relies on)."
-              />
-              <FAQItem
-                question="Why WebM?"
-                answer="Chrome records WebM efficiently. MP4 is available in the editor via local FFmpeg.wasm conversion where supported."
-              />
-              <FAQItem
-                question="Does it upload my video?"
-                answer="Core export is local. Any future cloud features would be explicit and opt-in."
-              />
-              <FAQItem
-                question="How do I stop recording quickly?"
-                answer="Ctrl+Shift+E on Windows/Linux, or ⌘+Shift+E on macOS."
-              />
-              <FAQItem
-                question="What permissions are needed?"
-                answer="Standard capture permissions plus a small content script during recording for accurate zoom—not for advertising tracking."
-              />
-              <FAQItem
-                question="Do I need a desktop video suite?"
-                answer="No. Capture, timeline edits, and local export run in Chrome for everyday demos."
-              />
-            </div>
+                {LANDING_FAQ_ITEMS.map(({ question, answer }) => (
+                  <FAQItem key={question} question={question} answer={answer} />
+                ))}
+              </div>
             </ScrollReveal>
           </div>
         </section>
