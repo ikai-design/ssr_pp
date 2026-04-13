@@ -239,6 +239,14 @@
   margin-bottom: 1.25rem;
 }
 
+/* Shrink-wrap to H1 width; subtitle stays one column and matches that width */
+.hero-headline-measure {
+  display: inline-block;
+  max-width: 100%;
+  text-align: center;
+  vertical-align: top;
+}
+
 .hero-section .heading-1.hero-title {
   display: flex;
   flex-direction: column;
@@ -257,7 +265,9 @@
 
 .hero-subhead {
   margin: 1.25rem auto 0;
-  max-width: 36rem;
+  width: 100%;
+  max-width: 100%;
+  text-wrap: pretty;
 }
 
 .hero-btns {

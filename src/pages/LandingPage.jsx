@@ -300,15 +300,17 @@ export default function LandingPage() {
           <div className="container">
             <div className="hero-content animate-fade-up">
               <p className="hero-eyebrow">Made for Chrome · Local-first export</p>
-              <h1 className="heading-1 hero-title">
-                <span className="hero-title-line">Plan clearer demos with</span>
-                <span className="hero-title-line">Simple Screen Recorder</span>
-              </h1>
-              <p className="subhead hero-subhead">
-                On a tab, click to zoom in smoothly and pan with the cursor—after a few seconds idle, zoom eases back to
-                full frame. Add browser-style frames and backgrounds in the editor, refine the timeline, then export WebM or
-                MP4 locally—no upload for the default workflow.
-              </p>
+              <div className="hero-headline-measure">
+                <h1 className="heading-1 hero-title">
+                  <span className="hero-title-line">Plan clearer demos with</span>
+                  <span className="hero-title-line">Simple Screen Recorder</span>
+                </h1>
+                <p className="subhead hero-subhead">
+                  On a tab, click to zoom in smoothly and pan with the cursor—after a few seconds idle, zoom eases back to
+                  full frame. Add browser-style frames and backgrounds in the editor, refine the timeline, then export WebM
+                  or MP4 locally—no upload for the default workflow.
+                </p>
+              </div>
               <div className="hero-btns">
                 <a href={CHROME_WEB_STORE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
                   Add to Chrome
