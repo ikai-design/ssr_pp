@@ -34,6 +34,9 @@ export const WORKFLOW_DEMO_VIDEO_URL = `${import.meta.env.BASE_URL}demo/workflow
 export const CHROME_WEB_STORE_URL =
   'https://chromewebstore.google.com/detail/...';
 
+/** Post-install and general product feedback (Tally form). */
+export const TALLY_FEEDBACK_URL = 'https://tally.so/r/GxBQy2';
+
 /** SPA routes (React Router `<Link>`, same-origin navigation) */
 export const PRIVACY_POLICY_URL = '/privacy';
 

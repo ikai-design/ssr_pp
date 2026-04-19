@@ -20,11 +20,13 @@ import {
   Headphones,
   Rocket,
   ArrowRight,
+  ExternalLink,
   Shield,
   Menu,
 } from 'lucide-react';
 import {
   CHROME_WEB_STORE_URL,
+  TALLY_FEEDBACK_URL,
   PRIVACY_POLICY_URL,
   TERMS_URL,
   SUPPORT_MAILTO,
@@ -232,6 +234,15 @@ export default function LandingPage() {
 
           <div className="header-actions">
             <a
+              href={TALLY_FEEDBACK_URL}
+              className="header-feedback-link"
+              target="_blank"
+              rel="noreferrer"
+              tabIndex={headerNavTabIndex}
+            >
+              Give feedback
+            </a>
+            <a
               href={CHROME_WEB_STORE_URL}
               className="btn btn-primary btn-header-cta"
               target="_blank"
@@ -279,6 +290,9 @@ export default function LandingPage() {
                 {label}
               </a>
             ))}
+            <a href={TALLY_FEEDBACK_URL} target="_blank" rel="noreferrer" onClick={closeMobileNav}>
+              Give feedback
+            </a>
             <a href={CHROME_WEB_STORE_URL} className="mobile-nav-cta" target="_blank" rel="noreferrer" onClick={closeMobileNav}>
               Add to Chrome
             </a>
@@ -694,10 +708,16 @@ export default function LandingPage() {
             <ScrollReveal>
               <h2 className="heading-2 cta-title">Add it from the Chrome Web Store</h2>
               <p className="subhead cta-sub">Keep video on your machine by default for the core export path.</p>
-              <a href={CHROME_WEB_STORE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
-                Add to Chrome
-                <ArrowRight className="btn-icon" size={18} aria-hidden />
-              </a>
+              <div className="cta-btns">
+                <a href={CHROME_WEB_STORE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
+                  Add to Chrome
+                  <ArrowRight className="btn-icon" size={18} aria-hidden />
+                </a>
+                <a href={TALLY_FEEDBACK_URL} className="btn btn-secondary" target="_blank" rel="noreferrer">
+                  Give feedback
+                  <ExternalLink className="btn-icon" size={18} aria-hidden />
+                </a>
+              </div>
             </ScrollReveal>
           </div>
         </section>
@@ -712,6 +732,9 @@ export default function LandingPage() {
           <div className="footer-links">
             <a href={CHROME_WEB_STORE_URL} target="_blank" rel="noreferrer">
               Chrome Web Store
+            </a>
+            <a href={TALLY_FEEDBACK_URL} target="_blank" rel="noreferrer">
+              Give feedback
             </a>
             <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
               Contact
