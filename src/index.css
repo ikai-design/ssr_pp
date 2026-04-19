@@ -1,4 +1,7 @@
 :root {
+  /** Entrance / UI easing — matches button curve family */
+  --motion-out: cubic-bezier(0.22, 1, 0.36, 1);
+
   /* Twinkle ecommerce ref: airy off-white canvas */
   --bg-base: #f9f9f9;
   --bg-surface: #ffffff;
@@ -208,6 +211,11 @@ button {
   transform: translateY(-1px);
 }
 
+.btn-primary:active {
+  background: #18181b;
+  transform: translateY(0) scale(0.98);
+}
+
 .btn-secondary {
   background: transparent;
   color: #000000;
@@ -217,6 +225,10 @@ button {
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.85);
   border-color: var(--border-color-hover);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
 }
 
 .btn-icon {
@@ -229,7 +241,7 @@ button {
   align-items: center;
   font-size: 0.65rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--text-secondary);
   background: var(--bg-surface-elevated);
@@ -258,7 +270,7 @@ button {
 }
 
 .animate-fade-up {
-  animation: fadeUp 0.55s ease-out forwards;
+  animation: fadeUp 0.55s var(--motion-out) forwards;
   opacity: 0;
 }
 
@@ -284,8 +296,8 @@ button {
   opacity: 0;
   transform: translateY(8px);
   transition:
-    opacity 0.45s ease-out,
-    transform 0.45s ease-out;
+    opacity 0.52s var(--motion-out),
+    transform 0.52s var(--motion-out);
 }
 
 .reveal-on-scroll--visible {
@@ -298,5 +310,11 @@ button {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: none;
   }
 }

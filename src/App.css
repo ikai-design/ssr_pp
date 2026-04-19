@@ -334,6 +334,20 @@
     0 20px 50px rgb(0 0 0 / 0.06),
     0 8px 24px rgb(0 0 0 / 0.04);
   line-height: 0;
+  transition:
+    box-shadow 0.4s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform 0.4s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    border-color 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-preview:hover .hero-preview-frame {
+    transform: translateY(-3px);
+    border-color: var(--border-color-hover);
+    box-shadow:
+      0 28px 60px rgb(0 0 0 / 0.08),
+      0 12px 28px rgb(0 0 0 / 0.05);
+  }
 }
 
 .hero-preview-frame--plugin {
@@ -414,6 +428,14 @@
   gap: 1.25rem;
 }
 
+.features-grid > .reveal-on-scroll {
+  min-width: 0;
+}
+
+.features-grid > .reveal-on-scroll > .feature-card {
+  height: 100%;
+}
+
 @media (min-width: 600px) {
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -432,6 +454,18 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow 0.32s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform 0.32s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    border-color 0.22s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .feature-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-color-hover);
+    box-shadow: var(--shadow-md);
+  }
 }
 
 .section-alt .feature-card {
@@ -472,11 +506,31 @@
   }
 }
 
+.steps-grid > .reveal-on-scroll {
+  min-width: 0;
+}
+
+.steps-grid > .reveal-on-scroll > .step-card {
+  height: 100%;
+}
+
 .step-card {
   padding: 1.5rem;
   background: var(--bg-base);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
+  transition:
+    box-shadow 0.32s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform 0.32s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    border-color 0.22s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .step-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-color-hover);
+    box-shadow: var(--shadow-sm);
+  }
 }
 
 .step-icon {
@@ -511,6 +565,18 @@
   background: #0a0a0a;
   aspect-ratio: 16 / 9;
   height: auto;
+  transition:
+    box-shadow 0.35s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform 0.35s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    border-color 0.22s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .workflow-demo:hover .workflow-demo-frame {
+    transform: translateY(-2px);
+    border-color: var(--border-color-hover);
+    box-shadow: var(--shadow-lg);
+  }
 }
 
 .workflow-demo-video {
@@ -540,6 +606,16 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow 0.32s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    border-color 0.22s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .comparison-table-wrap:hover {
+    border-color: var(--border-color-hover);
+    box-shadow: var(--shadow-md);
+  }
 }
 
 .comparison-table {
@@ -781,11 +857,31 @@
   }
 }
 
+.audience-grid > .reveal-on-scroll {
+  min-width: 0;
+}
+
+.audience-grid > .reveal-on-scroll > .audience-card {
+  height: 100%;
+}
+
 .audience-card {
   padding: 1.25rem;
   background: var(--bg-base);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
+  transition:
+    box-shadow 0.3s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform 0.3s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    border-color 0.22s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .audience-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-color-hover);
+    box-shadow: var(--shadow-sm);
+  }
 }
 
 .audience-icon {
@@ -871,7 +967,13 @@
 .faq-icon {
   flex-shrink: 0;
   opacity: 0.45;
-  transition: transform 0.25s ease;
+  transform: rotate(0deg);
+  transform-origin: center;
+  transition: transform 0.22s var(--motion-out, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.faq-question[aria-expanded='true'] .faq-icon {
+  transform: rotate(180deg);
 }
 
 .faq-answer {
@@ -951,4 +1053,23 @@
 
 .footer-links a:hover {
   color: var(--text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-preview-frame,
+  .feature-card,
+  .step-card,
+  .audience-card,
+  .workflow-demo-frame,
+  .comparison-table-wrap {
+    transition: none;
+  }
+
+  .hero-preview:hover .hero-preview-frame,
+  .feature-card:hover,
+  .step-card:hover,
+  .audience-card:hover,
+  .workflow-demo:hover .workflow-demo-frame {
+    transform: none;
+  }
 }
