@@ -33,7 +33,6 @@ import {
   SUPPORT_MAILTO_TITLE,
   SITE_HOME_URL,
   SITE_PUBLIC_ORIGIN,
-  WORKFLOW_DEMO_VIDEO_URL,
   LEGAL_ENTITY_PLACEHOLDER,
   ORGANIZATION_POSTAL,
 } from '../config';
@@ -465,29 +464,6 @@ export default function LandingPage() {
                 </div>
               </ScrollReveal>
             </div>
-
-            <ScrollReveal>
-              <figure
-                className="workflow-demo"
-                aria-label="Video walkthrough of capture, editing, and export in Simple Screen Recorder."
-              >
-                <div className="workflow-demo-frame">
-                  <video
-                    className="workflow-demo-video"
-                    src={WORKFLOW_DEMO_VIDEO_URL}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    controls
-                    preload="metadata"
-                  />
-                </div>
-                <figcaption className="workflow-demo-caption text-body">
-                  Short walkthrough: record (pause if needed), frame and polish on the timeline, export locally.
-                </figcaption>
-              </figure>
-            </ScrollReveal>
           </div>
         </section>
 

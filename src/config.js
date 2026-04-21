@@ -27,9 +27,6 @@ export const TERMS_PUBLIC_URL = siteOrigin ? `${siteOrigin}/terms` : '';
 /** Canonical homepage URL for `<link rel="canonical">` / sharing when `VITE_SITE_ORIGIN` is set. */
 export const SITE_HOME_URL = siteOrigin ? `${siteOrigin}/` : '';
 
-/** Product walkthrough clip under “How it works” (`public/demo/workflow-demo.mp4`). */
-export const WORKFLOW_DEMO_VIDEO_URL = `${import.meta.env.BASE_URL}demo/workflow-demo.mp4`;
-
 /** Set to your public listing URL when the extension is live in the Chrome Web Store. */
 export const CHROME_WEB_STORE_URL =
   'https://chromewebstore.google.com/detail/Simple%20Screen%20Recorder/iohegjmhpfcldjhpjnafinbbjoaakooi';
