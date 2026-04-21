@@ -32,7 +32,7 @@ export const WORKFLOW_DEMO_VIDEO_URL = `${import.meta.env.BASE_URL}demo/workflow
 
 /** Set to your public listing URL when the extension is live in the Chrome Web Store. */
 export const CHROME_WEB_STORE_URL =
-  'https://chromewebstore.google.com/detail/...';
+  'https://chromewebstore.google.com/detail/Simple%20Screen%20Recorder/iohegjmhpfcldjhpjnafinbbjoaakooi';
 
 /** Post-install and general product feedback (Tally form). */
 export const TALLY_FEEDBACK_URL = 'https://tally.so/r/GxBQy2';
