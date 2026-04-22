@@ -8,9 +8,6 @@ import {
   HardDrive,
   FileVideo,
   ChevronDown,
-  MonitorPlay,
-  Wand2,
-  Download,
   Keyboard,
   Check,
   X,
@@ -307,7 +304,7 @@ export default function LandingPage() {
         <section className="hero-section">
           <div className="container">
             <div className="hero-content animate-fade-up">
-              <p className="hero-eyebrow">Made for Chrome · Local-first export</p>
+              <span className="hero-eyebrow">Made for Chrome · Local-first export</span>
               <div className="hero-headline-measure">
                 <h1 className="heading-1 hero-title">
                   <span className="hero-title-line">Plan clearer demos with</span>
@@ -360,7 +357,7 @@ export default function LandingPage() {
               <ScrollReveal delayMs={0}>
                 <div className="feature-card">
                   <MousePointer2 className="feature-icon" size={22} aria-hidden />
-                  <h3 className="feature-title">Smooth zoom-to-cursor</h3>
+                  <h3 className="heading-3">Smooth zoom-to-cursor</h3>
                   <p className="feature-desc text-body">
                     On tab capture, click to zoom in and follow the cursor while zoomed; after a short idle period, zoom
                     returns to the full frame. Screen or window capture stays as picked—no page-level zoom cues.
@@ -370,7 +367,7 @@ export default function LandingPage() {
               <ScrollReveal delayMs={70}>
                 <div className="feature-card">
                   <Video className="feature-icon" size={22} aria-hidden />
-                  <h3 className="feature-title">Clicks become zoom blocks</h3>
+                  <h3 className="heading-3">Clicks become zoom blocks</h3>
                   <p className="feature-desc text-body">
                     Each recorded click spawns a zoom segment on the timeline with position and depth you can tweak—plus
                     auto-zoom depth presets when you want every click to match.
@@ -380,7 +377,7 @@ export default function LandingPage() {
               <ScrollReveal delayMs={140}>
                 <div className="feature-card">
                   <Scissors className="feature-icon" size={22} aria-hidden />
-                  <h3 className="feature-title">Built-in editor</h3>
+                  <h3 className="heading-3">Built-in editor</h3>
                   <p className="feature-desc text-body">
                     Timeline with trim and zoom blocks, preview, undo/redo—polish before export.
                   </p>
@@ -389,7 +386,7 @@ export default function LandingPage() {
               <ScrollReveal delayMs={210}>
                 <div className="feature-card">
                   <Layers className="feature-icon" size={22} aria-hidden />
-                  <h3 className="feature-title">Browser frames &amp; stage</h3>
+                  <h3 className="heading-3">Browser frames &amp; stage</h3>
                   <p className="feature-desc text-body">
                     Optional window-style browser chrome (default or minimal), shadows and borders, gradients or solid
                     fills, custom image backgrounds, and aspect presets for Slack, docs, or social.
@@ -399,7 +396,7 @@ export default function LandingPage() {
               <ScrollReveal delayMs={280}>
                 <div className="feature-card">
                   <HardDrive className="feature-icon" size={22} aria-hidden />
-                  <h3 className="feature-title">Local-first</h3>
+                  <h3 className="heading-3">Local-first</h3>
                   <p className="feature-desc text-body">
                     <FileVideo className="inline-icon" size={14} aria-hidden /> WebM in; MP4 out via bundled FFmpeg.wasm
                     where supported—on your device.
@@ -409,7 +406,7 @@ export default function LandingPage() {
               <ScrollReveal delayMs={350}>
                 <div className="feature-card">
                   <Keyboard className="feature-icon" size={22} aria-hidden />
-                  <h3 className="feature-title">Pause &amp; shortcut</h3>
+                  <h3 className="heading-3">Pause &amp; shortcut</h3>
                   <p className="feature-desc text-body">
                     Pause and resume while recording when you need a break. Stop quickly with Ctrl+Shift+E (Windows/Linux)
                     or ⌘+Shift+E (macOS).
@@ -432,20 +429,28 @@ export default function LandingPage() {
             <div className="steps-grid">
               <ScrollReveal delayMs={0}>
                 <div className="step-card">
-                  <div className="step-icon">
-                    <MonitorPlay size={22} aria-hidden />
+                  <div className="step-icon" aria-hidden="true">
+                    <span className="step-icon-num">1</span>
                   </div>
-                  <h3 className="heading-3">1. Start recording</h3>
-                  <p className="text-body">Choose tab capture or the system display picker, depending on mode.</p>
+                  <h3 className="heading-3">
+                    <span className="visually-hidden">Step 1: </span>
+                    Start recording
+                  </h3>
+                  <p className="feature-desc text-body">
+                    Choose tab capture or the system display picker, depending on mode.
+                  </p>
                 </div>
               </ScrollReveal>
               <ScrollReveal delayMs={75}>
                 <div className="step-card">
-                  <div className="step-icon">
-                    <Wand2 size={22} aria-hidden />
+                  <div className="step-icon" aria-hidden="true">
+                    <span className="step-icon-num">2</span>
                   </div>
-                  <h3 className="heading-3">2. Record your flow</h3>
-                  <p className="text-body">
+                  <h3 className="heading-3">
+                    <span className="visually-hidden">Step 2: </span>
+                    Record your flow
+                  </h3>
+                  <p className="feature-desc text-body">
                     On a tab, clicks drive zoom and optional cursor overlay data for the editor; on screen/window, you get
                     the capture you picked. Pause and resume anytime if you need to step away.
                   </p>
@@ -453,11 +458,14 @@ export default function LandingPage() {
               </ScrollReveal>
               <ScrollReveal delayMs={150}>
                 <div className="step-card">
-                  <div className="step-icon">
-                    <Download size={22} aria-hidden />
+                  <div className="step-icon" aria-hidden="true">
+                    <span className="step-icon-num">3</span>
                   </div>
-                  <h3 className="heading-3">3. Polish &amp; export</h3>
-                  <p className="text-body">
+                  <h3 className="heading-3">
+                    <span className="visually-hidden">Step 3: </span>
+                    Polish &amp; export
+                  </h3>
+                  <p className="feature-desc text-body">
                     Trim and tune zoom blocks, pick a browser frame and background, set quality and format, then download
                     locally from the editor tab.
                   </p>
