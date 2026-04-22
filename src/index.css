@@ -97,7 +97,7 @@ button {
 }
 
 .heading-2 { 
-  font-size: 56px; 
+  font-size: 48px; 
   line-height: 1.1; 
   font-weight: 500; 
   letter-spacing: -0.04em; 
@@ -169,7 +169,7 @@ button {
   }
 
   .heading-2 {
-    font-size: clamp(1.65rem, 5vw + 1rem, 56px);
+    font-size: clamp(1.65rem, 5vw + 1rem, 48px);
   }
 }
 
