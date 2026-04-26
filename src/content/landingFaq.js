@@ -8,7 +8,7 @@ export const LANDING_FAQ_ITEMS = [
   {
     question: 'Tab vs screen recording—what’s different?',
     answer:
-      'Tab capture enables click-based zoom and optional cursor overlay in the editor. Window or full-screen capture does not include page-level click/mouse data, so those enhancements are for tab workflows.',
+      'Tab capture is built for click-to-zoom: clicks and cursor motion line up with the page you record. Window or full-screen capture shows everything on screen; click-driven zoom is most dependable on tab recordings and can vary with source and setup.',
   },
   {
     question: 'How does zoom work on a tab recording?',
@@ -40,7 +40,7 @@ export const LANDING_FAQ_ITEMS = [
   {
     question: 'What permissions are needed?',
     answer:
-      'Standard capture permissions plus a small content script during recording for accurate zoom—not for advertising tracking.',
+      'Standard capture permissions, plus permission to run limited page scripts when needed so zoom follows your clicks and cursor accurately—used for recording features, not ad tracking.',
   },
   {
     question: 'Do I need a desktop video suite?',

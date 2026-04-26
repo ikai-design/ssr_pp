@@ -683,9 +683,10 @@ export default function LandingPage() {
               <h2 className="heading-2 trust-title">Privacy</h2>
               <p className="text-body trust-copy">
                 Recordings, optional custom background images, and exports are processed on your device in the default
-                workflow. The extension uses standard Chrome permissions to capture content and a lightweight pointer tracker
-                on pages you record—so zoom stays accurate. Host access is for recording eligible sites, not for ad-style
-                browsing history collection.
+                workflow. The extension uses standard Chrome permissions to capture content and runs limited page scripts
+                only when needed for accurate click-to-zoom—part of the recording workflow, not ad-style tracking or
+                ongoing browsing surveillance. Host access is for recording eligible sites, not for browsing history
+                collection.
               </p>
               <Link to={PRIVACY_POLICY_URL} className="trust-link">
                 Privacy policy
