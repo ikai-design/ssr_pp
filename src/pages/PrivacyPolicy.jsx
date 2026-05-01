@@ -148,7 +148,8 @@ export default function PrivacyPolicy() {
           a copy of your recording merely because you exported it locally.
         </p>
         <p>
-          The Extension may inject limited scripts on pages you record for accuracy of zoom-to-cursor behavior. Those
+          The Extension may inject limited scripts on pages you record for accuracy of spotlight (zoom-to-cursor)
+          behavior. Those
           mechanisms are used for capture functionality, not for building an advertising profile of your browsing across
           sites.
         </p>

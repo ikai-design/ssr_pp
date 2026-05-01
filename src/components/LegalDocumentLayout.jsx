@@ -20,7 +20,7 @@ export default function LegalDocumentLayout({ title, meta, canonicalHref, childr
     document.title = `${title} | Simple Screen Recorder`;
     window.scrollTo(0, 0);
     return () => {
-      document.title = 'Simple Screen Recorder | Chrome screen recorder with zoom & local export';
+      document.title = 'Simple Screen Recorder | Chrome screen recorder with Spotlight & local export';
     };
   }, [title]);
 

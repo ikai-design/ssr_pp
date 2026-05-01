@@ -5,7 +5,7 @@ import { CHROME_WEB_STORE_URL, SUPPORT_EMAIL, SUPPORT_MAILTO, SUPPORT_MAILTO_TIT
 import '../App.css';
 import '../legal.css';
 
-const DEFAULT_TITLE = 'Simple Screen Recorder | Chrome screen recorder with zoom & local export';
+const DEFAULT_TITLE = 'Simple Screen Recorder | Chrome screen recorder with Spotlight & local export';
 
 export default function ErrorShell({ code, title, description, documentTitle, showReload = false }) {
   useEffect(() => {
