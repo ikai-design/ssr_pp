@@ -289,7 +289,9 @@
 
 @media (max-width: 639px) {
   .hero-section .heading-1.hero-title {
-    font-size: clamp(2rem, 7vw + 1rem, 64px);
+    font-size: clamp(2.75rem, 10vw + 1.125rem, 3.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.045em;
   }
 }
 
