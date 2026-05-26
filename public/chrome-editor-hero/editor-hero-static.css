@@ -36,6 +36,23 @@
   box-shadow: var(--shadow-sm);
 }
 
+.editor-hero-page .hero-static-preview-inner--stage {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.editor-hero-page .hero-static-placeholder-caption {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
 .editor-hero-page .hero-static-kicker {
   margin: 0 0 4px;
   font-size: 13px;

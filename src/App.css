@@ -330,6 +330,15 @@
   }
 }
 
+.hero-audio-note {
+  margin: 0.75rem auto 0;
+  max-width: 28rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
 /* Hero: illustrated editor UI (vector/CSS — sharp on all DPR) */
 .hero-preview {
   margin: 2.75rem auto 0;
@@ -369,6 +378,7 @@
 .hero-preview-frame--plugin {
   display: block;
   line-height: 0;
+  pointer-events: none;
 }
 
 .hero-plugin-iframe {

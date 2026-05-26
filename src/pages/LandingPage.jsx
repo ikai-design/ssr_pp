@@ -76,7 +76,7 @@ function HeroMockup() {
   return (
     <figure
       className="hero-preview animate-fade-up delay-100"
-      aria-label="Simple Screen Recorder editor: preview with optional browser frame, timeline with trim and spotlight blocks, and export controls (static snapshot from the extension UI)."
+      aria-label="Simple Screen Recorder editor: preview with optional browser frame, timeline with trim blocks, and export controls (static snapshot from the extension UI)."
     >
       <div className="hero-preview-frame hero-preview-frame--plugin">
         <iframe
@@ -311,9 +311,9 @@ export default function LandingPage() {
                   <span className="hero-title-line">Simple Screen Recorder</span>
                 </h1>
                 <p className="subhead hero-subhead">
-                  On a tab, Spotlight turns clicks into smooth zoom-and-pan moments that follow the cursor—after a few
-                  seconds idle, the view eases back to full frame. Add browser-style frames and backgrounds in the editor,
-                  refine the timeline, then export WebM or MP4 locally—no upload for the default workflow.
+                  On a tab, clicks become smooth zoom-and-pan moments that follow the cursor—after a few seconds idle, the
+                  view eases back to full frame. Add browser-style frames and backgrounds in the editor, refine the timeline,
+                  then export WebM or MP4 locally—no upload for the default workflow.
                 </p>
               </div>
               <div className="hero-btns">
@@ -326,6 +326,9 @@ export default function LandingPage() {
                   <ArrowRight className="btn-icon" size={18} aria-hidden />
                 </a>
               </div>
+              <p className="hero-audio-note">
+                Records tab audio automatically. Enable mic toggle to add your voice.
+              </p>
             </div>
 
             <HeroMockup />
@@ -348,7 +351,8 @@ export default function LandingPage() {
               <div className="section-header">
                 <h2 className="heading-2">What you get</h2>
                 <p className="subhead section-lead">
-                  Spotlight storytelling, browser frames, a real timeline, and local export—not just a single raw capture.
+                  Click-guided demos in the browser, frames and backgrounds, a real timeline, and local export—not just a
+                  raw capture.
                 </p>
               </div>
             </ScrollReveal>
@@ -357,21 +361,21 @@ export default function LandingPage() {
               <ScrollReveal delayMs={0}>
                 <div className="feature-card">
                   <MousePointer2 className="feature-icon" size={22} aria-hidden />
-                  <h3 className="heading-3">Spotlight follows your clicks</h3>
+                  <h3 className="heading-3">Clicks guide the viewer</h3>
                   <p className="feature-desc text-body">
-                    On tab capture, each click can create a spotlight moment—the view zooms in and follows the cursor; after
-                    a short idle period, it returns to the full frame. Screen or window capture stays as picked—no
-                    page-level spotlight cues.
+                    On tab capture, each click can drive Spotlight—the in-editor highlight that zooms in and follows the
+                    cursor; after a short idle period, it returns to the full frame. Screen or window capture stays as
+                    picked—no page-level cues.
                   </p>
                 </div>
               </ScrollReveal>
               <ScrollReveal delayMs={70}>
                 <div className="feature-card">
                   <Video className="feature-icon" size={22} aria-hidden />
-                  <h3 className="heading-3">Clicks become spotlight blocks</h3>
+                  <h3 className="heading-3">Timeline highlight blocks</h3>
                   <p className="feature-desc text-body">
-                    Each recorded click spawns a spotlight segment on the timeline with position and depth you can
-                    tweak—plus auto spotlight depth presets when you want every click to match.
+                    Each recorded click spawns a Spotlight segment on the timeline with position and depth you can
+                    tweak—plus automatic depth presets when you want every click to match.
                   </p>
                 </div>
               </ScrollReveal>
@@ -380,7 +384,7 @@ export default function LandingPage() {
                   <Scissors className="feature-icon" size={22} aria-hidden />
                   <h3 className="heading-3">Built-in editor</h3>
                   <p className="feature-desc text-body">
-                    Timeline with trim and spotlight blocks, preview, undo/redo—polish before export.
+                    Timeline with trim and Spotlight segments, preview, undo/redo—polish before export.
                   </p>
                 </div>
               </ScrollReveal>
@@ -454,8 +458,8 @@ export default function LandingPage() {
                   </h3>
                   <p className="feature-desc text-body">
                     On a tab, a small recording pill (timer and Stop) stays on the page so you always know you’re
-                    recording. Clicks drive spotlight moments and optional cursor overlay data for the editor; on
-                    screen/window, you get the capture you picked. Pause and resume anytime if you need to step away.
+                    recording. Clicks feed the timeline and optional cursor overlay data for the editor; on screen/window,
+                    you get the capture you picked. Pause and resume anytime if you need to step away.
                   </p>
                 </div>
               </ScrollReveal>
@@ -469,7 +473,7 @@ export default function LandingPage() {
                     Polish &amp; export
                   </h3>
                   <p className="feature-desc text-body">
-                    Trim and tune spotlight blocks, pick a browser frame and background, set quality and format, then
+                    Trim and tune highlight segments, pick a browser frame and background, set quality and format, then
                     download locally from the editor tab.
                   </p>
                 </div>
@@ -520,7 +524,7 @@ export default function LandingPage() {
                   <tbody>
                     <tr>
                       <th scope="row" className="comparison-feature">
-                        Spotlight storytelling
+                        Click-guided zoom storytelling
                       </th>
                       <td className="comparison-side">
                         <span className="comparison-side-label">
@@ -539,7 +543,7 @@ export default function LandingPage() {
                     </tr>
                     <tr>
                       <th scope="row" className="comparison-feature">
-                        Timeline (trim / spotlight blocks)
+                        Timeline (trim / highlight segments)
                       </th>
                       <td className="comparison-side">
                         <span className="comparison-side-label">
@@ -687,7 +691,7 @@ export default function LandingPage() {
               <p className="text-body trust-copy">
                 Recordings, optional custom background images, and exports are processed on your device in the default
                 workflow. Permission prompts are for capture (tab or screen)—not background tracking. The extension uses
-                standard Chrome permissions and runs limited page scripts only when needed for accurate spotlight
+                standard Chrome permissions and runs limited page scripts only when needed for accurate click-to-zoom
                 behavior—part of the recording workflow, not ad-style tracking or ongoing browsing surveillance. Host
                 access is for recording eligible sites, not for browsing history collection.
               </p>

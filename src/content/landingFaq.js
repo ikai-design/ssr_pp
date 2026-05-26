@@ -8,12 +8,12 @@ export const LANDING_FAQ_ITEMS = [
   {
     question: 'Tab vs screen recording—what’s different?',
     answer:
-      'Tab capture is built for Spotlight: clicks and cursor motion line up with the page you record. Window or full-screen capture shows everything on screen; click-driven spotlight is most dependable on tab recordings and can vary with source and setup.',
+      'Tab capture lines up clicks and cursor motion with the page you record—best for guided demos in Chrome. Window or full-screen capture shows everything on screen; click-driven highlights are most dependable on tab recordings and can vary with source and setup.',
   },
   {
-    question: 'How does Spotlight work on a tab recording?',
+    question: 'How do click-to-zoom moments work on a tab recording?',
     answer:
-      'Click anywhere while recording to add a spotlight moment—the view zooms in smoothly and follows the cursor to pan. If you stop moving for a few seconds, it eases back to the full frame. Your clicks also become spotlight segments on the timeline you can trim and tune before export.',
+      'Click anywhere while recording to add a highlight moment—the view zooms in smoothly and follows the cursor to pan. If you stop moving for a few seconds, it eases back to the full frame. In the editor, those moments appear as Spotlight segments on the timeline you can trim and tune before export.',
   },
   {
     question: 'What about audio—and can I mute while recording?',
@@ -40,7 +40,7 @@ export const LANDING_FAQ_ITEMS = [
   {
     question: 'What permissions are needed?',
     answer:
-      'Standard capture permissions, plus permission to run limited page scripts when needed so Spotlight follows your clicks and cursor accurately—used for recording features, not ad tracking. Chrome will prompt for tab or screen access; that is for capture, not background surveillance.',
+      'Standard capture permissions, plus permission to run limited page scripts when needed so clicks and cursor line up accurately—used for recording features, not ad tracking. Chrome will prompt for tab or screen access; that is for capture, not background surveillance.',
   },
   {
     question: 'Do I need a desktop video suite?',

@@ -1,7 +1,7 @@
 import { LANDING_FAQ_ITEMS } from '../content/landingFaq';
 
 const META_DESCRIPTION =
-  'Record a tab or screen in Chrome: Spotlight storytelling with smooth zoom-in on what matters, browser-style frames, gradients or custom image backgrounds, timeline editing, pause/resume, and local WebM/MP4 export—no cloud upload for the default workflow.';
+  'Record a tab or screen in Chrome: guided click-to-zoom demos, browser-style frames, gradients or custom image backgrounds, timeline editing, pause/resume, and local WebM/MP4 export—no cloud upload for the default workflow.';
 
 function isLikelyChromeStoreUrl(url) {
   return (
