@@ -39,7 +39,7 @@ import { ScrollReveal } from '../components/ScrollReveal';
 import { useCanonicalLink } from '../hooks/useCanonicalLink';
 import '../App.css';
 
-const EDITOR_HERO_SRC = `${import.meta.env.BASE_URL}chrome-editor-hero/editor-hero.html`;
+const HERO_DEMO_SRC = `${import.meta.env.BASE_URL}demo/Demo_2026_SSR_2_1_.mp4`;
 
 function FAQItem({ question, answer }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,17 +73,51 @@ function FAQItem({ question, answer }) {
 }
 
 function HeroMockup() {
+  const videoRef = useRef(null);
+  const frameRef = useRef(null);
+
+  const syncFrameAspectRatio = () => {
+    const video = videoRef.current;
+    const frame = frameRef.current;
+    if (!video || !frame || !video.videoWidth || !video.videoHeight) return;
+    frame.style.aspectRatio = `${video.videoWidth} / ${video.videoHeight}`;
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const apply = () => {
+      if (mq.matches) {
+        video.pause();
+        video.removeAttribute('autoplay');
+      } else {
+        video.setAttribute('autoplay', '');
+        video.play().catch(() => {});
+      }
+    };
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
+
   return (
     <figure
       className="hero-preview animate-fade-up delay-100"
-      aria-label="Simple Screen Recorder editor: preview with optional browser frame, timeline with trim blocks, and export controls (static snapshot from the extension UI)."
+      aria-label="Product demo: timeline editor and export in Simple Screen Recorder."
     >
-      <div className="hero-preview-frame hero-preview-frame--plugin">
-        <iframe
-          className="hero-plugin-iframe"
-          src={EDITOR_HERO_SRC}
-          title="Simple Screen Recorder editor preview"
-          loading="lazy"
+      <div ref={frameRef} className="hero-preview-frame hero-preview-frame--demo">
+        <video
+          ref={videoRef}
+          className="hero-demo-video"
+          src={HERO_DEMO_SRC}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          onLoadedMetadata={syncFrameAspectRatio}
+          aria-label="Simple Screen Recorder timeline demo"
         />
       </div>
     </figure>

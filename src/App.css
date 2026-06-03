@@ -375,26 +375,20 @@
   }
 }
 
-.hero-preview-frame--plugin {
-  display: block;
-  line-height: 0;
-  pointer-events: none;
-}
-
-.hero-plugin-iframe {
+.hero-preview-frame--demo {
   display: block;
   width: 100%;
-  height: clamp(380px, 58vw, 660px);
+  line-height: 0;
+}
+
+.hero-demo-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
   border: 0;
   border-radius: inherit;
   background: var(--bg-surface);
-}
-
-/* Editor hero iframe is dense desktop UI — hide on tablet & mobile */
-@media (max-width: 1023px) {
-  .hero-preview {
-    display: none;
-  }
 }
 
 .social-line {
