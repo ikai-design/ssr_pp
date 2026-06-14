@@ -284,14 +284,14 @@
   text-wrap: wrap;
   line-height: 1.12;
   gap: 0.06em;
-  font-size: 64px;
+  font-size: calc(64px * 1.15);
 }
 
 @media (max-width: 639px) {
   .hero-section .heading-1.hero-title {
-    font-size: clamp(2.75rem, 10vw + 1.125rem, 3.75rem);
-    line-height: 1.08;
-    letter-spacing: -0.045em;
+    font-size: clamp(1.9rem, 5.75vw + 1.15rem, 55px);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
   }
 }
 
@@ -306,6 +306,30 @@
   text-wrap: pretty;
   font-size: 20px;
   line-height: 1.5;
+}
+
+/* Desktop: column width follows H1 text; subhead wraps inside same width */
+@media (min-width: 768px) {
+  .hero-headline-measure {
+    display: grid;
+    grid-template-columns: max-content;
+    justify-content: center;
+    margin-inline: auto;
+  }
+
+  .hero-section .heading-1.hero-title {
+    grid-column: 1;
+    width: max-content;
+    max-width: min(700px, 100%);
+    justify-self: center;
+  }
+
+  .hero-headline-measure .hero-subhead {
+    grid-column: 1;
+    width: 0;
+    min-width: 100%;
+    max-width: 100%;
+  }
 }
 
 .hero-btns {

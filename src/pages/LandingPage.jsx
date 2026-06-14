@@ -341,13 +341,12 @@ export default function LandingPage() {
               <span className="hero-eyebrow">Made for Chrome · Local-first export</span>
               <div className="hero-headline-measure">
                 <h1 className="heading-1 hero-title">
-                  <span className="hero-title-line">Plan clearer demos with</span>
-                  <span className="hero-title-line">Simple Screen Recorder</span>
+                  <span className="hero-title-line">Pro demo videos</span>
+                  <span className="hero-title-line">in a few clicks</span>
                 </h1>
                 <p className="subhead hero-subhead">
-                  On a tab, clicks become smooth zoom-and-pan moments that follow the cursor—after a few seconds idle, the
-                  view eases back to full frame. Add browser-style frames and backgrounds in the editor, refine the timeline,
-                  then export WebM or MP4 locally—no upload for the default workflow.
+                  Record Chrome tabs or app windows with guided click-to-zoom, browser frames, timeline editing, and local
+                  WebM or MP4 export—no upload.
                 </p>
               </div>
               <div className="hero-btns">
