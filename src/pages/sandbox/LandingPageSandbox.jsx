@@ -1,0 +1,781 @@
+import { useState, useEffect, useId, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import {
+  Video,
+  MousePointer2,
+  Scissors,
+  Layers,
+  HardDrive,
+  FileVideo,
+  ChevronDown,
+  Keyboard,
+  Check,
+  X,
+  Minus,
+  Users,
+  Briefcase,
+  Headphones,
+  Rocket,
+  ArrowRight,
+  ExternalLink,
+  Shield,
+  Menu,
+} from 'lucide-react';
+import {
+  CHROME_WEB_STORE_URL,
+  TALLY_FEEDBACK_URL,
+  PRIVACY_POLICY_URL,
+  TERMS_URL,
+  SUPPORT_MAILTO,
+  SUPPORT_MAILTO_TITLE,
+} from '../../config';
+import { LANDING_FAQ_ITEMS } from '../../content/landingFaq';
+import { ScrollReveal } from '../../components/ScrollReveal';
+import { SandboxBanner } from './SandboxBanner';
+import { HeroScrollSection } from './HeroScrollSection';
+import '../../App.css';
+import './sandbox.css';
+
+const SHOW_TESTIMONIAL = import.meta.env.VITE_SHOW_HERO_TESTIMONIAL !== 'false';
+
+const HERO_TRUST_CHIPS = ['No cloud', 'No account', 'No upload'];
+
+/** Extension manifest v2.3.2 — update if permissions change. */
+const CHROME_PERMISSIONS = [
+  { name: 'activeTab', why: 'Access the tab you choose to record.' },
+  { name: 'tabs', why: 'Start, stop, and manage recording across tabs.' },
+  {
+    name: 'scripting',
+    why: 'Detect clicks on recorded pages for auto-zoom — not for ad-style tracking.',
+  },
+  { name: 'downloads', why: 'Save your MP4 or WebM export to your machine.' },
+  { name: 'storage', why: 'Remember your editor preferences locally on your device.' },
+  {
+    name: 'Host access (http/https)',
+    why: 'Record web pages you visit — not for browsing history collection.',
+  },
+];
+
+const LOCAL_TRUST_POINTS = [
+  'Recording and FFmpeg MP4 conversion run entirely in your browser.',
+  'No servers receive your video in the default workflow.',
+  'We never see your screen — no cloud storage, no analytics on recording content.',
+  'No account — install from the Chrome Web Store and record.',
+];
+
+function FAQItem({ question, answer }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const panelId = useId();
+  const triggerId = useId();
+
+  return (
+    <div className="faq-item">
+      <button
+        type="button"
+        id={triggerId}
+        className="faq-question"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+      >
+        {question}
+        <ChevronDown className="faq-icon" aria-hidden size={20} />
+      </button>
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={triggerId}
+        hidden={!isOpen}
+        className={`faq-answer${isOpen ? ' animate-fade-up' : ''}`}
+      >
+        <p>{answer}</p>
+      </div>
+    </div>
+  );
+}
+
+const HEADER_NAV_LINKS = [
+  { href: '#features', label: 'Features' },
+  { href: '#workflow', label: 'How it works' },
+  { href: '#privacy', label: 'Privacy' },
+  { href: '#comparison', label: 'Compare' },
+  { href: '#faq', label: 'FAQ' },
+];
+
+const SANDBOX_PATH = '/sandbox';
+
+export default function LandingPageSandbox() {
+  const location = useLocation();
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const menuButtonRef = useRef(null);
+  const panelRef = useRef(null);
+  const backdropRef = useRef(null);
+  const prevMobileNavOpen = useRef(false);
+
+  useEffect(() => {
+    if (!mobileNavOpen) return;
+    const scrollY = window.scrollY;
+    const prevOverflow = document.body.style.overflow;
+    const prevPosition = document.body.style.position;
+    const prevTop = document.body.style.top;
+    const prevWidth = document.body.style.width;
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setMobileNavOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.body.style.position = prevPosition;
+      document.body.style.top = prevTop;
+      document.body.style.width = prevWidth;
+      window.scrollTo(0, scrollY);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [mobileNavOpen]);
+
+  useEffect(() => {
+    if (!mobileNavOpen) return;
+    const panel = panelRef.current;
+    const backdrop = backdropRef.current;
+    const sel = 'a[href], button:not([disabled])';
+    const fromPanel = panel ? [...panel.querySelectorAll(sel)] : [];
+    const fromBackdrop = backdrop ? [backdrop] : [];
+    const focusables = [...fromPanel, ...fromBackdrop];
+    if (focusables.length === 0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    const focusFirst = () => window.requestAnimationFrame(() => first.focus());
+
+    focusFirst();
+
+    const onKeyDown = (e) => {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [mobileNavOpen]);
+
+  useEffect(() => {
+    if (prevMobileNavOpen.current && !mobileNavOpen) {
+      menuButtonRef.current?.focus();
+    }
+    prevMobileNavOpen.current = mobileNavOpen;
+  }, [mobileNavOpen]);
+
+  const closeMobileNav = () => setMobileNavOpen(false);
+  const headerNavTabIndex = mobileNavOpen ? -1 : undefined;
+
+  const handleLogoClick = (e) => {
+    closeMobileNav();
+    if (location.pathname === SANDBOX_PATH) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (location.hash) {
+        window.history.replaceState(null, '', SANDBOX_PATH);
+      }
+    }
+  };
+
+  return (
+    <div className="app-wrapper app-wrapper--sandbox">
+      <SandboxBanner />
+      <header className={`app-header${mobileNavOpen ? ' mobile-nav-open' : ''}`}>
+        <div className="container header-container">
+          <Link to={SANDBOX_PATH} className="logo" tabIndex={headerNavTabIndex} onClick={handleLogoClick}>
+            <Video size={20} className="logo-icon" aria-hidden />
+            <span className="logo-text">Simple Screen Recorder</span>
+          </Link>
+
+          <nav className="header-nav" aria-label="Sections">
+            {HEADER_NAV_LINKS.map(({ href, label }) => (
+              <a key={href} href={href} tabIndex={headerNavTabIndex}>
+                {label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="header-actions">
+            <a
+              href={TALLY_FEEDBACK_URL}
+              className="header-feedback-link"
+              target="_blank"
+              rel="noreferrer"
+              tabIndex={headerNavTabIndex}
+            >
+              Give feedback
+            </a>
+            <a
+              href={CHROME_WEB_STORE_URL}
+              className="btn btn-primary btn-header-cta"
+              target="_blank"
+              rel="noreferrer"
+              tabIndex={headerNavTabIndex}
+            >
+              Add to Chrome
+              <ArrowRight className="btn-icon" size={16} aria-hidden />
+            </a>
+            <button
+              type="button"
+              ref={menuButtonRef}
+              className="header-menu-toggle"
+              aria-expanded={mobileNavOpen}
+              aria-controls="mobile-nav"
+              onClick={() => setMobileNavOpen((open) => !open)}
+            >
+              {mobileNavOpen ? (
+                <>
+                  <X size={22} aria-hidden />
+                  <span className="visually-hidden">Close menu</span>
+                </>
+              ) : (
+                <>
+                  <Menu size={22} aria-hidden />
+                  <span className="visually-hidden">Open menu</span>
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="mobile-nav"
+          ref={panelRef}
+          className={`mobile-nav-panel${mobileNavOpen ? ' mobile-nav-panel--open' : ''}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+          hidden={!mobileNavOpen}
+        >
+          <nav className="mobile-nav-links" aria-label="Sections">
+            {HEADER_NAV_LINKS.map(({ href, label }) => (
+              <a key={href} href={href} onClick={closeMobileNav}>
+                {label}
+              </a>
+            ))}
+            <a href={TALLY_FEEDBACK_URL} target="_blank" rel="noreferrer" onClick={closeMobileNav}>
+              Give feedback
+            </a>
+            <a href={CHROME_WEB_STORE_URL} className="mobile-nav-cta" target="_blank" rel="noreferrer" onClick={closeMobileNav}>
+              Add to Chrome
+            </a>
+          </nav>
+        </div>
+        {mobileNavOpen ? (
+          <button
+            type="button"
+            ref={backdropRef}
+            className="mobile-nav-backdrop"
+            aria-label="Close menu"
+            onClick={closeMobileNav}
+          />
+        ) : null}
+      </header>
+
+      <main id="main-content">
+        <HeroScrollSection>
+          <div className="hero-content">
+            <span className="hero-eyebrow">Chrome extension · 100% local · No account required</span>
+            <div className="hero-headline-measure">
+              <h1 id="hero-title" className="heading-1 hero-title">
+                <span className="hero-title-line">Turn raw captures into</span>
+                <span className="hero-title-line">polished product demos</span>
+              </h1>
+              <p className="subhead hero-subhead">
+                Auto-zoom on every click and a demo-ready browser frame — one-click MP4, processed entirely in your
+                browser. Nothing is uploaded.
+              </p>
+            </div>
+            <div className="hero-btns">
+              <a href={CHROME_WEB_STORE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
+                Add to Chrome — it&rsquo;s free
+                <ArrowRight className="btn-icon" size={18} aria-hidden />
+              </a>
+              <a href="#privacy" className="btn btn-secondary">
+                How your data stays private
+                <ArrowRight className="btn-icon" size={18} aria-hidden />
+              </a>
+            </div>
+            <ul className="hero-trust-chips" aria-label="Privacy highlights">
+              {HERO_TRUST_CHIPS.map((chip) => (
+                <li key={chip}>{chip}</li>
+              ))}
+            </ul>
+            {SHOW_TESTIMONIAL ? (
+              <blockquote className="hero-testimonial">
+                <p>&ldquo;Love it — used it for a real demo on day one.&rdquo;</p>
+                <footer>
+                  <cite>Hermione Gogou</cite>
+                  <span className="hero-testimonial-role">Design @ Mollie</span>
+                </footer>
+              </blockquote>
+            ) : null}
+          </div>
+        </HeroScrollSection>
+
+        <section className="social-line">
+          <div className="container">
+            <ScrollReveal>
+              <p className="social-line-text">
+                For product, support, and founders who need clearer screen demos—without a heavy desktop suite.
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        <section id="features" className="section">
+          <div className="container">
+            <ScrollReveal>
+              <div className="section-header">
+                <h2 className="heading-2">What you get</h2>
+                <p className="subhead section-lead">
+                  Click-guided demos in the browser, frames and backgrounds, a real timeline, and local export—not just a
+                  raw capture.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="features-grid">
+              <ScrollReveal delayMs={0}>
+                <div className="feature-card">
+                  <MousePointer2 className="feature-icon" size={22} aria-hidden />
+                  <h3 className="heading-3">Clicks guide the viewer</h3>
+                  <p className="feature-desc text-body">
+                    On tab capture, each click can drive Spotlight—the in-editor highlight that zooms in and follows the
+                    cursor; after a short idle period, it returns to the full frame. Screen or window capture stays as
+                    picked—no page-level cues.
+                  </p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delayMs={70}>
+                <div className="feature-card">
+                  <Video className="feature-icon" size={22} aria-hidden />
+                  <h3 className="heading-3">Timeline highlight blocks</h3>
+                  <p className="feature-desc text-body">
+                    Each recorded click spawns a Spotlight segment on the timeline with position and depth you can
+                    tweak—plus automatic depth presets when you want every click to match.
+                  </p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delayMs={140}>
+                <div className="feature-card">
+                  <Scissors className="feature-icon" size={22} aria-hidden />
+                  <h3 className="heading-3">Built-in editor</h3>
+                  <p className="feature-desc text-body">
+                    Timeline with trim and Spotlight segments, preview, undo/redo—polish before export.
+                  </p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delayMs={210}>
+                <div className="feature-card">
+                  <Layers className="feature-icon" size={22} aria-hidden />
+                  <h3 className="heading-3">Browser frames &amp; stage</h3>
+                  <p className="feature-desc text-body">
+                    Optional window-style browser chrome (default or minimal), shadows and borders, gradients or solid
+                    fills, custom image backgrounds, and aspect presets for Slack, docs, or social.
+                  </p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delayMs={280}>
+                <div className="feature-card">
+                  <HardDrive className="feature-icon" size={22} aria-hidden />
+                  <h3 className="heading-3">Local-first</h3>
+                  <p className="feature-desc text-body">
+                    <FileVideo className="inline-icon" size={14} aria-hidden /> WebM in; MP4 out via bundled FFmpeg.wasm
+                    where supported—on your device.
+                  </p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delayMs={350}>
+                <div className="feature-card">
+                  <Keyboard className="feature-icon" size={22} aria-hidden />
+                  <h3 className="heading-3">Pause &amp; shortcut</h3>
+                  <p className="feature-desc text-body">
+                    Pause and resume while recording when you need a break. Stop quickly with Ctrl+Shift+E (Windows/Linux)
+                    or ⌘+Shift+E (macOS).
+                  </p>
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        </section>
+
+        <section id="workflow" className="section section-alt">
+          <div className="container">
+            <ScrollReveal>
+              <div className="section-header">
+                <h2 className="heading-2">How it works</h2>
+                <p className="subhead section-lead">
+                  Everything happens on your device. Three steps from capture to download.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="steps-grid">
+              <ScrollReveal delayMs={0}>
+                <div className="step-card">
+                  <div className="step-icon" aria-hidden="true">
+                    <span className="step-icon-num">1</span>
+                  </div>
+                  <h3 className="heading-3">
+                    <span className="visually-hidden">Step 1: </span>
+                    Start recording
+                  </h3>
+                  <p className="feature-desc text-body">
+                    Choose tab capture or the system display picker, depending on mode. Chrome will ask for screen or tab
+                    access—that prompt is for capture only; nothing is uploaded in the default workflow.
+                  </p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delayMs={75}>
+                <div className="step-card">
+                  <div className="step-icon" aria-hidden="true">
+                    <span className="step-icon-num">2</span>
+                  </div>
+                  <h3 className="heading-3">
+                    <span className="visually-hidden">Step 2: </span>
+                    Record your flow
+                  </h3>
+                  <p className="feature-desc text-body">
+                    On a tab, a small recording pill (timer and Stop) stays on the page so you always know you’re
+                    recording. Clicks feed the timeline and optional cursor overlay data for the editor; on screen/window,
+                    you get the capture you picked. Pause and resume anytime if you need to step away.
+                  </p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delayMs={150}>
+                <div className="step-card">
+                  <div className="step-icon" aria-hidden="true">
+                    <span className="step-icon-num">3</span>
+                  </div>
+                  <h3 className="heading-3">
+                    <span className="visually-hidden">Step 3: </span>
+                    Polish &amp; export
+                  </h3>
+                  <p className="feature-desc text-body">
+                    Trim and tune highlight segments, pick a browser frame and background, set quality and format, then
+                    download locally from the editor tab.
+                  </p>
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        </section>
+
+        <section id="comparison" className="section">
+          <div className="container">
+            <ScrollReveal>
+              <div className="section-header section-header--hero-width">
+                <h2 className="heading-2">Versus a basic recorder</h2>
+                <p className="subhead section-lead">
+                  Free in Chrome—with timeline polish and local export. Basic tools often stay free for simple capture only;
+                  real editing and export are where paid tiers and limits usually show up.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delayMs={90}>
+              <div className="comparison-table-wrap">
+                <table className="comparison-table">
+                  <caption className="visually-hidden">
+                    Comparison of features for a basic screen recorder versus Simple Screen Recorder
+                  </caption>
+                  <thead>
+                    <tr className="comparison-table__head-row">
+                      <th scope="col" className="comparison-th-feature comparison-header-feature">
+                        Features
+                      </th>
+                      <th scope="col" className="comparison-th-basic comparison-col-muted">
+                        <span className="comparison-col comparison-col-stack">
+                          <span className="comparison-col-title">Basic recorder</span>
+                          <span className="comparison-col-note">Pricing varies</span>
+                        </span>
+                      </th>
+                      <th scope="col" className="comparison-th-brand comparison-col-brand">
+                        <span className="comparison-col comparison-col-stack">
+                          <span className="comparison-col-title comparison-col-title--brand">
+                            Simple Screen Recorder
+                          </span>
+                          <span className="comparison-col-note comparison-col-note--free">Free</span>
+                        </span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Click-guided zoom storytelling
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <X className="icon-x" size={18} aria-hidden />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Timeline (trim / highlight segments)
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <X className="icon-x" size={18} aria-hidden />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Local MP4 without cloud for core path
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <Minus className="icon-varies" size={18} aria-label="Varies" />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Backgrounds &amp; aspect presets
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <X className="icon-x" size={18} aria-hidden />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Browser chrome / window frame
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <X className="icon-x" size={18} aria-hidden />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" className="comparison-feature">
+                        Pause / resume while recording
+                      </th>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Basic recorder</span>
+                          <span className="comparison-side-label-note">Pricing varies</span>
+                        </span>
+                        <Minus className="icon-varies" size={18} aria-label="Varies" />
+                      </td>
+                      <td className="comparison-side">
+                        <span className="comparison-side-label">
+                          <span className="comparison-side-label-line">Simple Screen Recorder</span>
+                          <span className="comparison-side-label-note comparison-side-label-note--free">Free</span>
+                        </span>
+                        <Check className="icon-check" size={18} aria-hidden />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        <section id="customers" className="section section-alt">
+          <div className="container">
+            <ScrollReveal>
+              <div className="section-header">
+                <h2 className="heading-2">Who it’s for</h2>
+              </div>
+            </ScrollReveal>
+            <div className="audience-grid">
+              <ScrollReveal delayMs={0}>
+                <div className="audience-card">
+                  <Briefcase size={22} className="audience-icon" aria-hidden />
+                  <h3 className="heading-3">Product &amp; GTM</h3>
+                  <p className="text-body">Demos, walkthroughs, internal updates.</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delayMs={65}>
+                <div className="audience-card">
+                  <Headphones size={22} className="audience-icon" aria-hidden />
+                  <h3 className="heading-3">Support</h3>
+                  <p className="text-body">Repros and guided fixes customers can follow.</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delayMs={130}>
+                <div className="audience-card">
+                  <Rocket size={22} className="audience-icon" aria-hidden />
+                  <h3 className="heading-3">Founders &amp; builders</h3>
+                  <p className="text-body">Async comms without a studio stack.</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delayMs={195}>
+                <div className="audience-card">
+                  <Users size={22} className="audience-icon" aria-hidden />
+                  <h3 className="heading-3">Creators</h3>
+                  <p className="text-body">Browser capture with export options per channel.</p>
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        </section>
+
+        <section id="privacy" className="section trust-block trust-block--expanded">
+          <div className="container trust-inner">
+            <ScrollReveal>
+              <div className="trust-header">
+                <Shield size={36} className="trust-icon" aria-hidden />
+                <h2 className="heading-2 trust-title">Your screen never touches our servers</h2>
+                <p className="text-body trust-copy">
+                  Everything happens on your device. Here is how that works, in plain English.
+                </p>
+              </div>
+
+              <div className="trust-grid">
+                <div className="trust-card">
+                  <h3 className="heading-3">How it works</h3>
+                  <ul className="trust-points">
+                    {LOCAL_TRUST_POINTS.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="trust-card">
+                  <h3 className="heading-3">Chrome permissions, explained</h3>
+                  <dl className="perm-list">
+                    {CHROME_PERMISSIONS.map(({ name, why }) => (
+                      <div key={name} className="perm-row">
+                        <dt>{name}</dt>
+                        <dd>{why}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </div>
+
+              <p className="trust-footer-link">
+                <Link to={PRIVACY_POLICY_URL} className="trust-link">
+                  Read the full privacy policy
+                  <ArrowRight size={16} aria-hidden />
+                </Link>
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        <section id="faq" className="section">
+          <div className="container">
+            <ScrollReveal>
+              <div className="section-header">
+                <h2 className="heading-2">FAQ</h2>
+              </div>
+            </ScrollReveal>
+            <div className="faq-container">
+              {LANDING_FAQ_ITEMS.map(({ question, answer }, index) => (
+                <ScrollReveal key={question} delayMs={index * 50}>
+                  <FAQItem question={question} answer={answer} />
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="cta-section" id="cta">
+          <div className="container cta-inner">
+            <ScrollReveal>
+              <h2 className="heading-2 cta-title">Add it from the Chrome Web Store</h2>
+              <p className="subhead cta-sub">Keep video on your machine by default for the core export path.</p>
+              <div className="cta-btns">
+                <a href={CHROME_WEB_STORE_URL} className="btn btn-primary" target="_blank" rel="noreferrer">
+                  Add to Chrome
+                  <ArrowRight className="btn-icon" size={18} aria-hidden />
+                </a>
+                <a href={TALLY_FEEDBACK_URL} className="btn btn-secondary" target="_blank" rel="noreferrer">
+                  Give feedback
+                  <ExternalLink className="btn-icon" size={18} aria-hidden />
+                </a>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      </main>
+
+      <footer className="app-footer">
+        <div className="container footer-content">
+          <Link to={SANDBOX_PATH} className="logo">
+            <Video size={20} className="logo-icon" aria-hidden />
+            <span className="logo-text">Simple Screen Recorder</span>
+          </Link>
+          <div className="footer-links">
+            <a href={CHROME_WEB_STORE_URL} target="_blank" rel="noreferrer">
+              Chrome Web Store
+            </a>
+            <a href={TALLY_FEEDBACK_URL} target="_blank" rel="noreferrer">
+              Give feedback
+            </a>
+            <a href={SUPPORT_MAILTO} title={SUPPORT_MAILTO_TITLE}>
+              Contact
+            </a>
+            <Link to={PRIVACY_POLICY_URL}>Privacy</Link>
+            <Link to={TERMS_URL}>Terms</Link>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

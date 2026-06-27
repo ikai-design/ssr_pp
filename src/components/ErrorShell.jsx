@@ -27,7 +27,7 @@ export default function ErrorShell({ code, title, description, documentTitle, sh
   }, []);
 
   return (
-    <div className="error-page">
+    <div className="app-wrapper app-wrapper--v2 error-page">
       <header className="legal-header">
         <div className="container legal-header-inner">
           <Link to="/" className="logo">

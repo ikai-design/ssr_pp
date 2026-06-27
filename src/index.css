@@ -1,3 +1,12 @@
+@import 'tailwindcss';
+
+/* The animated How it works UI uses Tailwind utilities. Keep its sources
+   explicit so their classes are retained by the v4 production compiler. */
+@source './pages/v2/animations/RecordAnimation.jsx';
+@source './pages/v2/animations/PolishAnimation.jsx';
+@source './pages/v2/animations/ExportAnimation.jsx';
+@source './pages/v2/animations/PrivacyAnimation.jsx';
+
 :root {
   /** Entrance / UI easing — matches button curve family */
   --motion-out: cubic-bezier(0.22, 1, 0.36, 1);

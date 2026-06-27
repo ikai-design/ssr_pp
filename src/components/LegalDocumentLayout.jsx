@@ -25,7 +25,7 @@ export default function LegalDocumentLayout({ title, meta, canonicalHref, childr
   }, [title]);
 
   return (
-    <div className="legal-layout">
+    <div className="app-wrapper app-wrapper--v2 legal-layout">
       <header className="legal-header">
         <div className="container legal-header-inner">
           <Link to="/" className="logo">

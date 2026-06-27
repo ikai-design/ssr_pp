@@ -1,4 +1,24 @@
 /* Shared layout for legal + system error pages */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+.legal-layout,
+.error-page {
+  /* Map design variables to v2 tokens for unified branding */
+  --bg-base: #ffffff;
+  --bg-surface: #faf9fb;
+  --bg-surface-elevated: #f3edf5;
+  --text-primary: #240029;
+  --text-secondary: #6b5c6e;
+  --text-tertiary: #6b5c6e;
+  --text-hover: #3d1038;
+  --border-color: #ebe6ec;
+  --border-color-hover: #d9d0dc;
+
+  --v2-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --v2-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  font-family: var(--v2-body);
+}
 
 .legal-layout {
   min-height: 100vh;
@@ -16,8 +36,8 @@
   padding: calc(0.875rem + env(safe-area-inset-top)) 0 0.875rem;
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
-  background: rgba(249, 249, 249, 0.92);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -54,8 +74,15 @@
 
 .legal-main {
   flex: 1;
-  padding: 2rem 0 3rem;
-  padding-bottom: max(3rem, calc(2rem + env(safe-area-inset-bottom)));
+  padding: 3.5rem 0 5rem;
+  padding-bottom: max(5rem, calc(3.5rem + env(safe-area-inset-bottom)));
+}
+
+@media (max-width: 639px) {
+  .legal-main {
+    padding: 2rem 0 3.5rem;
+    padding-bottom: max(3.5rem, calc(2rem + env(safe-area-inset-bottom)));
+  }
 }
 
 .legal-doc {
@@ -68,11 +95,19 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+@media (max-width: 639px) {
+  .legal-doc-header {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+  }
+}
+
 .legal-doc-title {
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  font-family: var(--v2-display);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .legal-doc-meta {
@@ -91,18 +126,28 @@
   margin-bottom: 2.25rem;
 }
 
+@media (max-width: 639px) {
+  .legal-section {
+    margin-bottom: 1.75rem;
+  }
+}
+
 .legal-section h2 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: var(--v2-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   margin-bottom: 0.85rem;
   color: var(--text-primary);
+  line-height: 1.2;
 }
 
 .legal-section h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 1.25rem 0 0.5rem;
+  font-family: var(--v2-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.6rem;
+  line-height: 1.2;
 }
 
 .legal-section p {
@@ -133,10 +178,12 @@
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 2px;
+  transition: color 0.2s ease;
 }
 
 .legal-prose a:hover {
-  opacity: 0.85;
+  color: var(--text-hover);
+  opacity: 1;
 }
 
 .legal-section code {
@@ -186,10 +233,12 @@
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--text-primary);
+  transition: color 0.2s ease;
 }
 
 .legal-footer-back:hover {
-  opacity: 0.85;
+  color: var(--text-hover);
+  opacity: 1;
 }
 
 .legal-footer-back-icon {
@@ -205,10 +254,11 @@
 .legal-footer-links a {
   color: var(--text-secondary);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .legal-footer-links a:hover {
-  color: var(--text-primary);
+  color: var(--text-hover);
 }
 
 /* Error pages */
@@ -226,33 +276,43 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 2rem 1rem 3rem;
-  padding-bottom: max(3rem, calc(2rem + env(safe-area-inset-bottom)));
+  padding: 4rem 1.5rem 5rem;
+  padding-bottom: max(5rem, calc(4rem + env(safe-area-inset-bottom)));
+}
+
+@media (max-width: 639px) {
+  .error-main {
+    padding: 2.5rem 1rem 3.5rem;
+    padding-bottom: max(3.5rem, calc(2.5rem + env(safe-area-inset-bottom)));
+  }
 }
 
 .error-code {
-  font-size: clamp(3.5rem, 14vw, 5rem);
-  font-weight: 600;
-  letter-spacing: -0.06em;
+  font-family: var(--v2-display);
+  font-size: clamp(4rem, 16vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
   color: var(--border-color-hover);
   line-height: 1;
   margin-bottom: 1rem;
 }
 
 .error-title {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-family: var(--v2-display);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
-  max-width: 26rem;
+  max-width: 32rem;
+  line-height: 1.15;
 }
 
 .error-desc {
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.6;
-  max-width: 26rem;
-  margin-bottom: 1.75rem;
+  max-width: 28rem;
+  margin-bottom: 2rem;
 }
 
 .error-actions {
@@ -268,15 +328,69 @@
 }
 
 .error-footer-contact {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   font-size: 0.9375rem;
 }
 
 .error-footer-contact a {
   color: var(--text-secondary);
   font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .error-footer-contact a:hover {
+  color: var(--text-hover);
+}
+
+/* Button UI overrides for v2 aesthetic on legal/error pages */
+.legal-layout .btn,
+.error-page .btn {
+  font-family: var(--v2-body);
+  font-weight: 500;
+  border-radius: 999px;
+  min-height: 2.625rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.legal-layout .btn-primary,
+.error-page .btn-primary {
+  background: var(--text-primary);
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.legal-layout .btn-primary:hover,
+.error-page .btn-primary:hover {
+  background: var(--text-hover);
+  transform: translateY(-1px);
+}
+
+.legal-layout .btn-primary:active,
+.error-page .btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.legal-layout .btn-secondary,
+.error-page .btn-secondary {
+  background: transparent;
   color: var(--text-primary);
+  border: 1px solid var(--border-color-hover);
+}
+
+.legal-layout .btn-secondary:hover,
+.error-page .btn-secondary:hover {
+  background: var(--bg-surface);
+  border-color: var(--border-color-hover);
+}
+
+.legal-layout .btn-secondary:active,
+.error-page .btn-secondary:active {
+  transform: scale(0.98);
 }

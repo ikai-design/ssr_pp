@@ -34,6 +34,15 @@ export const CHROME_WEB_STORE_URL =
 /** Post-install and general product feedback (Tally form). */
 export const TALLY_FEEDBACK_URL = 'https://tally.so/r/GxBQy2';
 
+/**
+ * Public GitHub repository URL for the open-source trust signal.
+ * Set `VITE_GITHUB_REPO_URL` once the repo is public; empty hides every "open source" surface.
+ */
+export const GITHUB_REPO_URL =
+  typeof import.meta !== 'undefined' && import.meta.env?.VITE_GITHUB_REPO_URL
+    ? String(import.meta.env.VITE_GITHUB_REPO_URL).trim()
+    : '';
+
 /** SPA routes (React Router `<Link>`, same-origin navigation) */
 export const PRIVACY_POLICY_URL = '/privacy';
 
