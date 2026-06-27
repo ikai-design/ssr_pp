@@ -298,7 +298,7 @@
 .v2-hero-subhead {
   max-width: 42rem;
   margin: 24px auto 0;
-  font-size: 24px;
+  font-size: var(--v2-type-body);
   line-height: 1.55;
   color: var(--v2-text-muted);
   animation: v2-hero-load-in 720ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
@@ -336,7 +336,7 @@
 .v2-hero-trust-line {
   margin: 1.25rem auto 0;
   color: var(--v2-text-muted);
-  font-size: var(--v2-type-body-sm);
+  font-size: var(--v2-type-body);
   animation: v2-hero-load-in 720ms cubic-bezier(0.16, 1, 0.3, 1) 360ms both;
 }
 
@@ -1086,8 +1086,26 @@
   font-family: var(--v2-body);
 }
 
-.app-wrapper--v2 .footer-links a,
+.app-wrapper--v2 .footer-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.5rem 3.5rem;
+}
+
 .app-wrapper--v2 .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem 2rem;
+  color: var(--v2-text-muted);
+  font-size: 0.875rem;
+}
+
+.app-wrapper--v2 .footer-links a {
   color: var(--v2-text-muted);
   font-size: 0.875rem;
 }
@@ -1111,7 +1129,7 @@
     gap: 0.5rem 0.75rem;
   }
 
-  .app-wrapper--v2 .logo-text {
+  .app-wrapper--v2 .app-header .logo-text {
     display: none;
   }
 
@@ -1131,7 +1149,7 @@
   .v2-hero-subhead {
     max-width: 19rem;
     margin-top: var(--v2-space-sm);
-    font-size: var(--v2-type-body-sm);
+    font-size: var(--v2-type-body);
   }
 
   .v2-hero-actions {
@@ -1140,7 +1158,7 @@
 
   .v2-hero-trust-line {
     margin-top: var(--v2-space-sm);
-    font-size: var(--v2-type-body-sm);
+    font-size: var(--v2-type-body);
   }
 
   .v2-privacy-animation-flow {
@@ -1231,5 +1249,17 @@
 
   .app-wrapper--v2 .v2-faq-accordion .faq-question {
     padding: 1.125rem 0;
+  }
+
+  .app-wrapper--v2 .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .app-wrapper--v2 .footer-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
   }
 }
