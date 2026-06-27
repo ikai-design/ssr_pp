@@ -31,7 +31,7 @@ export function PrivacyAnimation() {
   return (
     <div className="ssr-animation-shell">
       <div className="ssr-animation absolute inset-0 flex items-center justify-center overflow-hidden bg-[#F5F5F5] font-sans text-[#240029]">
-        <div className="flex items-center justify-center gap-6">
+        <div className="flex items-center justify-center gap-6 v2-privacy-animation-flow">
           <MotionDiv className="flex min-w-0 flex-col items-center" animate={enter(0.08, 0.18)}>
             <span className="flex h-20 w-20 items-center justify-center rounded-lg bg-white shadow-md"><Video size={34} strokeWidth={1.6} /></span>
             <span className="mt-2 text-[11px] font-medium text-[#6B5C6E]">Record</span>

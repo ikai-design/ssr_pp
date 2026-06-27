@@ -298,7 +298,7 @@
 .v2-hero-subhead {
   max-width: 42rem;
   margin: 24px auto 0;
-  font-size: 24px;
+  font-size: var(--v2-type-body-sm);
   line-height: 1.55;
   color: var(--v2-text-muted);
   animation: v2-hero-load-in 720ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
@@ -1131,7 +1131,7 @@
   .v2-hero-subhead {
     max-width: 19rem;
     margin-top: var(--v2-space-sm);
-    font-size: 1rem;
+    font-size: var(--v2-type-body-sm);
   }
 
   .v2-hero-actions {
@@ -1140,7 +1140,29 @@
 
   .v2-hero-trust-line {
     margin-top: var(--v2-space-sm);
-    font-size: 0.875rem;
+    font-size: var(--v2-type-body-sm);
+  }
+
+  .v2-privacy-animation-flow {
+    transform-origin: center;
+  }
+
+  @media (max-width: 500px) {
+    .v2-privacy-animation-flow {
+      transform: scale(0.82);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .v2-privacy-animation-flow {
+      transform: scale(0.7);
+    }
+  }
+
+  @media (max-width: 350px) {
+    .v2-privacy-animation-flow {
+      transform: scale(0.62);
+    }
   }
 
   .v2-hero-preview {
