@@ -31,20 +31,20 @@ export function PrivacyAnimation() {
   return (
     <div className="ssr-animation-shell">
       <div className="ssr-animation absolute inset-0 flex items-center justify-center overflow-hidden bg-[#F5F5F5] font-sans text-[#240029]">
-        <div className="flex items-start justify-center gap-6 v2-privacy-animation-flow">
-          <MotionDiv className="flex min-w-0 flex-col items-center" animate={enter(0.08, 0.18)}>
+        <div className="flex items-center justify-center gap-6 v2-privacy-animation-flow">
+          <MotionDiv className="relative flex flex-col items-center" animate={enter(0.08, 0.18)}>
             <span className="flex h-20 w-20 items-center justify-center rounded-lg bg-white shadow-md"><Video size={34} strokeWidth={1.6} /></span>
-            <span className="mt-2 text-[11px] font-medium text-[#6B5C6E]">Record</span>
+            <span className="absolute top-full mt-2 text-[11px] font-medium text-[#6B5C6E] whitespace-nowrap">Record</span>
           </MotionDiv>
-          <MotionDiv className="text-[#6B5C6E]/60 mt-[31px]" animate={arrow(0.22, 0.3)}><ArrowRight size={18} /></MotionDiv>
-          <MotionDiv className="flex min-w-0 flex-col items-center" animate={enter(0.32, 0.42)}>
+          <MotionDiv className="text-[#6B5C6E]/60" animate={arrow(0.22, 0.3)}><ArrowRight size={18} /></MotionDiv>
+          <MotionDiv className="relative flex flex-col items-center" animate={enter(0.32, 0.42)}>
             <span className="flex h-20 w-20 items-center justify-center rounded-lg bg-white shadow-md"><Scissors size={34} strokeWidth={1.6} /></span>
-            <span className="mt-2 text-[11px] font-medium text-[#6B5C6E]">Edit</span>
+            <span className="absolute top-full mt-2 text-[11px] font-medium text-[#6B5C6E] whitespace-nowrap">Edit</span>
           </MotionDiv>
-          <MotionDiv className="text-[#6B5C6E]/60 mt-[31px]" animate={arrow(0.46, 0.54)}><ArrowRight size={18} /></MotionDiv>
-          <MotionDiv className="flex min-w-0 flex-col items-center" animate={enter(0.56, 0.66)}>
+          <MotionDiv className="text-[#6B5C6E]/60" animate={arrow(0.46, 0.54)}><ArrowRight size={18} /></MotionDiv>
+          <MotionDiv className="relative flex flex-col items-center" animate={enter(0.56, 0.66)}>
             <span className="flex h-20 w-20 items-center justify-center rounded-lg bg-white shadow-md"><FileVideo size={34} strokeWidth={1.6} /></span>
-            <span className="mt-2 text-[11px] font-medium text-[#6B5C6E]">Local MP4</span>
+            <span className="absolute top-full mt-2 text-[11px] font-medium text-[#6B5C6E] whitespace-nowrap">Local MP4</span>
           </MotionDiv>
         </div>
       </div>
