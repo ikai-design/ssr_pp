@@ -3,7 +3,27 @@
   <url>
     <loc>https://simple-screen-recorder.com/</loc>
     <changefreq>weekly</changefreq>
-    <priority>1</priority>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://simple-screen-recorder.com/loom-alternative</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://simple-screen-recorder.com/screen-studio-alternative</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://simple-screen-recorder.com/cap-alternative</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://simple-screen-recorder.com/free-chrome-extension</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simple-screen-recorder.com/privacy</loc>
