@@ -239,6 +239,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.querySelector('.mobile-nav-toggle');
   const header = document.querySelector('.app-header');
   
+  if (header) {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        header.classList.add('app-header--scrolled');
+      } else {
+        header.classList.remove('app-header--scrolled');
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Run initial check
+  }
+  
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
       // Toggle a simple header class to reveal/hide links

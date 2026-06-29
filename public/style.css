@@ -249,15 +249,69 @@ h1, h2, h3, h4 {
 .app-header {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: calc(0.875rem + env(safe-area-inset-top)) 0 0.875rem;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: 100%;
   background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid var(--border-color);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-color);
-  transition: var(--transition-smooth);
+  z-index: 100;
+  padding: calc(0.875rem + env(safe-area-inset-top)) 0 0.875rem;
+  transition: 
+    top 0.4s var(--motion-out),
+    width 0.4s var(--motion-out),
+    border-radius 0.4s var(--motion-out),
+    padding 0.4s var(--motion-out),
+    box-shadow 0.4s var(--motion-out),
+    border-color 0.4s var(--motion-out),
+    background-color 0.4s var(--motion-out);
+}
+
+.app-header--scrolled {
+  top: 1.25rem;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: 60%;
+  max-width: 1200px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  box-shadow: 0 12px 32px rgb(36 0 41 / 0.08);
+  padding: 0.5rem 0;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.app-header--scrolled .container {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+@media (max-width: 991px) {
+  .app-header--scrolled {
+    width: 85%;
+    top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header--scrolled {
+    top: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-top: 0 !important;
+    box-shadow: none !important;
+    padding: 1rem 0 !important;
+  }
+  .app-header--scrolled .container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
 }
 
 .header-container {
@@ -384,7 +438,7 @@ h1, h2, h3, h4 {
 
 /* Hero Section */
 .hero-section {
-  padding: 100px 0 100px;
+  padding: 12rem 0 6rem;
   text-align: center;
   position: relative;
   overflow: hidden;
