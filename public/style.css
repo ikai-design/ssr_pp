@@ -345,6 +345,14 @@ h1, h2, h3, h4 {
   color: var(--text-secondary);
 }
 
+@media (min-width: 768px) {
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
 .header-nav a:hover {
   color: var(--text-primary);
 }
