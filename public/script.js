@@ -259,4 +259,17 @@ document.addEventListener('DOMContentLoaded', () => {
       header.classList.toggle('nav-open');
     });
   }
+
+  // Close mobile navigation drawer when a link is clicked
+  if (header) {
+    const navLinks = header.querySelectorAll('.header-nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        header.classList.remove('nav-open');
+        if (toggleBtn) {
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  }
 });

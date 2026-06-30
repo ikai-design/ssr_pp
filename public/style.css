@@ -430,7 +430,34 @@ h1, h2, h3, h4 {
 @media (max-width: 768px) {
   .header-nav {
     display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem 2.5rem;
+    gap: 1.25rem;
+    box-shadow: var(--shadow-md);
+    z-index: 99;
   }
+  
+  .app-header.nav-open .header-nav {
+    display: flex;
+  }
+
+  /* Scrolled Capsule dropdown rounding alignment */
+  .app-header--scrolled.nav-open {
+    border-radius: 28px 28px 0 0;
+  }
+
+  .app-header--scrolled.nav-open .header-nav {
+    border-radius: 0 0 28px 28px;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+  }
+
   .mobile-nav-toggle {
     display: block;
   }
