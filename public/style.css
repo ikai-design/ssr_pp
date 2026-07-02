@@ -1310,3 +1310,132 @@ h1, h2, h3, h4 {
     gap: 0.85rem;
   }
 }
+
+/* ——— Blog Article Styling ——— */
+.post-content {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-primary);
+  margin-top: 2rem;
+}
+
+.post-content p {
+  margin-bottom: 1.6rem;
+}
+
+.post-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin: 3.25rem 0 1.25rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.post-content h3 {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 2.25rem 0 1rem;
+  color: var(--text-primary);
+}
+
+.post-content ul, 
+.post-content ol {
+  margin-bottom: 1.6rem;
+  padding-left: 1.75rem;
+}
+
+.post-content li {
+  margin-bottom: 0.65rem;
+}
+
+.post-content pre {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.75rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.post-content code {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  background: var(--bg-surface);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.post-content pre code {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.post-content blockquote {
+  border-left: 3px solid var(--text-primary);
+  padding-left: 1.5rem;
+  margin: 2.5rem 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.post-content hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 3.5rem 0;
+}
+
+/* Author bio widget */
+.author-bio-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 2rem;
+  margin-top: 4.5rem;
+}
+
+.author-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: #240029;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.author-bio-details h4 {
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.author-bio-details p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+@media (max-width: 639px) {
+  .author-bio-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 1.75rem;
+  }
+}
+

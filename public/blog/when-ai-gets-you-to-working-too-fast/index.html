@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="robots" content="index, follow">
+  <title>When AI Gets You to “Working” Too Fast — Simple Screen Recorder Blog</title>
+  <meta name="description" content="A camera overlay feature taught me when to stop patching, write down the constraints, and rebuild. Why rollbacks and specifications matter more than another 'fix this' prompt.">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="When AI Gets You to “Working” Too Fast — Simple Screen Recorder Blog">
+  <meta property="og:description" content="A camera overlay feature taught me when to stop patching, write down the constraints, and rebuild. Why rollbacks and specifications matter more than another 'fix this' prompt.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://simple-screen-recorder.com/blog/when-ai-gets-you-to-working-too-fast">
+  <meta property="og:image" content="https://simple-screen-recorder.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <link rel="canonical" href="https://simple-screen-recorder.com/blog/when-ai-gets-you-to-working-too-fast">
+
+  <!-- Link Stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="container header-container">
+      <a href="/" class="logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 7l-7 5 7 5V7z"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+        <span class="logo-text">Simple Screen Recorder</span>
+      </a>
+      
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/loom-alternative">Loom Alternative</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://chromewebstore.google.com/detail/simple-screen-recorder/iohegjmhpfcldjhpjnafinbbjoaakooi" class="btn btn-primary btn-header-cta" target="_blank" rel="noopener">Add to Chrome</a>
+        <button class="mobile-nav-toggle" aria-expanded="false" aria-label="Toggle Navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content Section -->
+  <section class="section">
+    <div class="container" style="max-width: 780px;">
+      
+      <a href="/blog" class="eyebrow" style="text-decoration: none; margin-bottom: 2.5rem;">
+        ← Back to Blog
+      </a>
+      
+      <header class="post-header" style="margin-bottom: 3.5rem;">
+        <div class="mock-card-meta" style="margin-bottom: 1rem; font-family: var(--font-body); font-size: 0.88rem; color: var(--text-secondary);">July 2, 2026 • 6 min read</div>
+        <h1 class="heading-1" style="font-size: clamp(2.2rem, 3.5vw + 1rem, 3.5rem); line-height: 1.1; margin-bottom: 1.5rem; font-family: var(--font-display); text-align: left;">
+          When AI Gets You to “Working” Too Fast
+        </h1>
+        <p class="subhead" style="font-size: 1.2rem; line-height: 1.55; color: var(--text-secondary); font-family: var(--font-body); text-align: left; max-width: none;">
+          A camera overlay feature taught me when to stop patching, write down the constraints, and rebuild.
+        </p>
+      </header>
+      
+      <div class="post-content">
+        <p>AI can get you to a convincing first version surprisingly fast.</p>
+        <p>That changes where the risk sits.</p>
+        <p>The problem is no longer only getting something to work. It is noticing when “working” is hiding a system you can no longer explain.</p>
+        <p>As a product designer, I’ve spent the last few months building a side project: <strong>Simple Screen Recorder</strong>, a local-first Chrome extension for browser walkthroughs and product demos. Recently, while building a camera overlay feature, I ran into a trap that I see teams falling into everywhere.</p>
+        
+        <hr>
+        
+        <h2>1. The First Version Looked "Close Enough"</h2>
+        <p>The camera overlay feature seemed simple on paper: let users record their webcam in a circular frame placed in the corner of their browser window while capturing a tab.</p>
+        <p>I prompted my AI coding assistant. Within minutes, the UI appeared. The camera feed rendered. Drag-and-drop worked. I could see myself in a circular bubble in the corner.</p>
+        <p>It worked just well enough to make the worst next step feel entirely reasonable: <em>keep fixing the edge cases as they appear.</em></p>
+        <p>But when I started recording, the edge cases multiplied:</p>
+        <ul>
+          <li>Closing the camera overlay during a recording left the screen layout distorted.</li>
+          <li>Changing recording quality settings occasionally reset the camera stream state.</li>
+          <li>The preview in the browser looked perfect, but the exported MP4 file sometimes had the webcam out of sync.</li>
+        </ul>
+        <p>Each time I noticed an issue, I sent a new prompt: <em>"Fix the layout distortion when the camera is closed."</em> Or <em>"Ensure the export timing matches the preview."</em></p>
+        <p>The model solved each localized task. But with every fix, the code grew more complex. Event listeners were patched on top of state variables, which were patched on top of DOM manipulation hacks. We were resolving local symptoms while introducing system-level fragility.</p>
+        <p>For a recording tool, visual correctness is not enough.</p>
+        <p>A user needs to know whether the camera is active, what will appear in the final export, and what happens when they change something halfway through a recording.</p>
+        <p>Otherwise, the feature may work technically — but still feel unsafe to use.</p>
+        
+        <hr>
+        
+        <h2>2. The Trap Was Not Bad Code. It Was Local Optimization.</h2>
+        <p>We often blame LLMs for "hallucinating" or writing messy code when a codebase gets tangled. But the model wasn't failing randomly. It was doing exactly what I asked: solving the micro-problem of the moment, inside a system neither of us had fully mapped.</p>
+        <p>In AI-assisted building, the dangerous phase is not when code fails to compile. It’s when it <em>almost</em> works.</p>
+        <p>At that point, each local improvement made the system harder to reason about. The feature looked better on the surface. But the cost of changing it safely kept rising.</p>
+        
+        <hr>
+        
+        <h2>3. I Stopped Patching and Asked for a Map</h2>
+        <p>When the cost of explaining the current broken implementation to the AI became higher than the cost of rebuilding it, I stopped.</p>
+        <p>Before changing the code again, I asked the model to help me map the feature:</p>
+        <ul>
+          <li>What states existed;</li>
+          <li>Which component owned each one;</li>
+          <li>How the camera stream started and stopped;</li>
+          <li>What preview and export shared;</li>
+          <li>What had to remain true when the overlay was removed, settings changed, or recording ended.</li>
+        </ul>
+        <p>Writing a specification is often viewed as a slow, pre-AI development process. But in the era of AI, a specification is the ultimate lever. Without it, you are feeding the model ambiguity. And when ambiguity is expensive, the code it produces will be fragile.</p>
+        
+        <hr>
+        
+        <h2>4. The Rollback Was the Productive Move</h2>
+        <p>Once I had a clearer map of the state flow, I rolled the feature back. I deleted the nested event listeners and state patches, returning the code to the last clean, predictable state I could reason about.</p>
+        <blockquote>I rolled back to the last version I could explain.</blockquote>
+        <p>A rollback isn't a regression. It’s a removal of uncertainty. If you cannot explain why a piece of code works, you cannot safely prompt an AI to modify it.</p>
+        <p>The rebuild took less time than I expected. More importantly, the result was easier to explain, easier to test, and less fragile when I changed adjacent parts of the recording flow.</p>
+        <h3>Pseudo-State Lifecycle Flow:</h3>
+        <pre><code>Overlay mounted
+→ request camera stream
+→ attach stream to preview
+→ attach stream to recording pipeline
+→ recording ends or overlay closes
+→ stop tracks
+→ clear references
+→ restore previous layout state</code></pre>
+        
+        <hr>
+        
+        <h2>5. Three Rules I Now Use When Building with AI</h2>
+        <p>This experience forced me to shift how I interact with code generation. If you use AI assistants, these three heuristics will save you days of debug cycles:</p>
+        <h3>Rule 1: Describe what must <em>not</em> break, not just what should happen</h3>
+        <p>AI models are highly optimistic—they build for the happy path. When describing a feature, define the boundaries:</p>
+        <ul>
+          <li><em>“Closing the camera overlay must restore the prior page grid layout exactly.”</em></li>
+          <li><em>“Changing the mic input setting must not reset the webcam stream state.”</em></li>
+        </ul>
+        <h3>Rule 2: Define the invariant before asking for the fix</h3>
+        <p>When you spot a bug, don’t just paste the error. Explain the rule that was violated:</p>
+        <ul>
+          <li><strong>Weak prompt:</strong> <em>"The camera export timing is off. Fix it."</em></li>
+          <li><strong>Stronger prompt:</strong> <em>"Preview and export must derive timing from the same source of truth. Inspect the current timing flow, identify where they diverge, and propose the smallest change that preserves this invariant."</em></li>
+        </ul>
+        <h3>Rule 3: Use stronger reasoning where ambiguity is expensive</h3>
+        <p>Use your strongest model for system mapping, architecture decisions, failure analysis, and difficult debugging. Use faster or cheaper models only after the task is bounded and the acceptance criteria are explicit.</p>
+        
+        <hr>
+        
+        <h2>6. The Product Lesson: Users Only See "Trust"</h2>
+        <p>An early tester once described re-recording the same clip repeatedly in another tool because they could not tell where its zoom would begin or end until after export.</p>
+        <p>That changed my definition of “done.”</p>
+        <p>A feature can technically work and still be too opaque for people to trust. If a setting is active but its status is invisible, the user experiences it as randomness.</p>
+        
+        <p>AI can generate a functional feature in minutes.</p>
+        <p>It cannot decide which uncertainty is acceptable for the person using it.</p>
+        <p>That still requires product judgment:
+        what must remain stable,
+        what users need to see,
+        and where the system is allowed to fail.</p>
+        <p>Product quality doesn’t come from the volume of code you generate. It comes from the constraints you design.</p>
+        
+        <!-- Author Bio Card -->
+        <div class="author-bio-card">
+          <div class="author-avatar">EV</div>
+          <div class="author-bio-details">
+            <h4>Eugene Voroniuk</h4>
+            <p>I’m a Senior Product Designer working on activation, monetisation, and the gap between a feature that works and a product people can trust. Currently building <a href="/" style="font-weight: 600;">Simple Screen Recorder</a>.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <div class="footer-logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 7l-7 5 7 5V7z"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+        <span>Simple Screen Recorder</span>
+      </div>
+      <div class="footer-links">
+        <a href="/blog">Blog</a>
+        <a href="/loom-alternative">Loom Alternative</a>
+        <a href="/screen-studio-alternative">Screen Studio Alternative</a>
+        <a href="/cap-alternative">Cap Alternative</a>
+        <a href="/free-chrome-extension">Free Chrome Recorder</a>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <span>© 2026 Simple Screen Recorder. All rights reserved.</span>
+      <span>Independent Craft Product.</span>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>

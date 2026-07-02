@@ -26,6 +26,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://simple-screen-recorder.com/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://simple-screen-recorder.com/blog/when-ai-gets-you-to-working-too-fast</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://simple-screen-recorder.com/privacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

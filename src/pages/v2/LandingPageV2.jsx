@@ -573,6 +573,7 @@ export default function LandingPageV2() {
             <span className="logo-text">Simple Screen Recorder</span>
           </Link>
           <div className="footer-links">
+            <a href="/blog">Blog</a>
             <a href={CHROME_WEB_STORE_URL} target="_blank" rel="noreferrer">
               Chrome Web Store
             </a>
