@@ -14,6 +14,7 @@ import {
 import { ScrollReveal } from '../../components/ScrollReveal';
 import { useCanonicalLink } from '../../hooks/useCanonicalLink';
 import { buildLandingJsonLd } from '../../seo/landingJsonLd';
+import { V2_FAQ_ITEMS } from '../../content/v2Faq';
 import { HeroOverlay } from './HeroOverlay';
 import { ContentRow } from './ContentRow';
 import { V2_ASSETS } from './v2Assets';
@@ -80,29 +81,7 @@ const HOW_IT_WORKS_STEPS = [
   },
 ];
 
-const VALIDATION_FAQ_ITEMS = [
-  {
-    question: 'What can I record?',
-    answer:
-      'You can record a Chrome tab, browser window, or screen. Tab recording is best for browser walkthroughs with click-guided zooms.',
-  },
-  {
-    question: 'Does it upload my video?',
-    answer: 'No. The default export workflow keeps the recording on your device and saves the MP4 locally.',
-  },
-  {
-    question: 'Do I need an account?',
-    answer: 'No account is required. Install the Chrome extension and record from Chrome.',
-  },
-  {
-    question: 'Can I edit the recording before exporting?',
-    answer: 'Yes. You can trim, add a browser frame and background, tune click-guided zooms, and export an MP4.',
-  },
-  {
-    question: 'Which Chrome version do I need?',
-    answer: 'Chrome 116 or newer.',
-  },
-];
+const VALIDATION_FAQ_ITEMS = V2_FAQ_ITEMS;
 
 function RealMedia({
   src,
@@ -264,6 +243,7 @@ export default function LandingPageV2() {
       storeUrl: CHROME_WEB_STORE_URL,
       publisherName: LEGAL_ENTITY_PLACEHOLDER,
       ...ORGANIZATION_POSTAL,
+      faqItems: V2_FAQ_ITEMS,
     });
     el.textContent = JSON.stringify(data);
     return () => {

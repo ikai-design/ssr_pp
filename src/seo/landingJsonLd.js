@@ -21,6 +21,7 @@ export function buildLandingJsonLd({
   streetAddress,
   addressLocality,
   addressCountry,
+  faqItems = LANDING_FAQ_ITEMS,
 }) {
   const base = siteOrigin.replace(/\/$/, '');
   const websiteId = `${base}/#website`;
@@ -66,7 +67,7 @@ export function buildLandingJsonLd({
     },
     {
       '@type': 'FAQPage',
-      mainEntity: LANDING_FAQ_ITEMS.map(({ question, answer }) => ({
+      mainEntity: faqItems.map(({ question, answer }) => ({
         '@type': 'Question',
         name: question,
         acceptedAnswer: {

@@ -1,0 +1,17 @@
+# Simple Screen Recorder
+
+> Free Chrome extension for recording a browser tab, window, or screen with
+> automatic click-to-zoom (Spotlight), browser-style frames, gradient or custom
+> image backgrounds, timeline editing with trim, pause/resume, webcam-free
+> workflow, and local WebM/MP4 export. No account, no watermark, and no cloud
+> upload in the default workflow. Published by ikai design. Chrome Web Store:
+> https://chromewebstore.google.com/detail/simple-screen-recorder/iohegjmhpfcldjhpjnafinbbjoaakooi
+
+## Pages
+- [Home](https://simple-screen-recorder.com/): features, how it works, FAQ, install link
+- [Loom alternative](https://simple-screen-recorder.com/loom-alternative/): feature-by-feature comparison vs Loom
+- [Screen Studio alternative](https://simple-screen-recorder.com/screen-studio-alternative/): comparison vs Screen Studio
+- [Cap alternative](https://simple-screen-recorder.com/cap-alternative/): comparison vs Cap
+- [Free Chrome extension](https://simple-screen-recorder.com/free-chrome-extension/): what's free and why
+- [Blog](https://simple-screen-recorder.com/blog/): articles on screen recording and demo workflows
+- [Privacy](https://simple-screen-recorder.com/privacy/): privacy policy

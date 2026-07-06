@@ -2,52 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simple-screen-recorder.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-07-06</lastmod>
   </url>
   <url>
-    <loc>https://simple-screen-recorder.com/loom-alternative</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://simple-screen-recorder.com/loom-alternative/</loc>
+    <lastmod>2026-07-06</lastmod>
   </url>
   <url>
-    <loc>https://simple-screen-recorder.com/screen-studio-alternative</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://simple-screen-recorder.com/screen-studio-alternative/</loc>
+    <lastmod>2026-07-06</lastmod>
   </url>
   <url>
-    <loc>https://simple-screen-recorder.com/cap-alternative</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://simple-screen-recorder.com/cap-alternative/</loc>
+    <lastmod>2026-07-06</lastmod>
   </url>
   <url>
-    <loc>https://simple-screen-recorder.com/free-chrome-extension</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://simple-screen-recorder.com/free-chrome-extension/</loc>
+    <lastmod>2026-07-06</lastmod>
   </url>
   <url>
-    <loc>https://simple-screen-recorder.com/blog</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://simple-screen-recorder.com/blog/</loc>
+    <lastmod>2026-07-06</lastmod>
   </url>
   <url>
-    <loc>https://simple-screen-recorder.com/blog/when-ai-gets-you-to-working-too-fast</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://simple-screen-recorder.com/blog/when-ai-gets-you-to-working-too-fast/</loc>
+    <lastmod>2026-07-06</lastmod>
   </url>
   <url>
-    <loc>https://simple-screen-recorder.com/privacy</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://simple-screen-recorder.com/privacy/</loc>
+    <lastmod>2026-07-06</lastmod>
   </url>
   <url>
-    <loc>https://simple-screen-recorder.com/terms</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://simple-screen-recorder.com/privacy-policy.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://simple-screen-recorder.com/terms/</loc>
+    <lastmod>2026-07-06</lastmod>
   </url>
 </urlset>
