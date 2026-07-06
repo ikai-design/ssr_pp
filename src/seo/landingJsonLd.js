@@ -55,7 +55,7 @@ export function buildLandingJsonLd({
       description: META_DESCRIPTION,
       applicationCategory: 'MultimediaApplication',
       operatingSystem: 'Chrome',
-      browserRequirements: 'Requires Chrome 116+. Manifest V3.',
+      softwareRequirements: 'Requires Chrome 116+. Manifest V3.',
       offers: {
         '@type': 'Offer',
         price: '0',
