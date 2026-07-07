@@ -1263,3 +1263,16 @@
     gap: 0.85rem;
   }
 }
+
+.app-wrapper--v2 .footer-copyright {
+  width: 100%;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--v2-border);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.8125rem;
+  color: var(--v2-text-muted);
+}

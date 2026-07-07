@@ -71,6 +71,10 @@ export default function LegalDocumentLayout({ title, meta, canonicalHref, childr
               <Link to={TERMS_URL}>Terms</Link>
             </div>
           </div>
+          <div className="footer-copyright" style={{ marginTop: '2rem', paddingTop: '2.5rem', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', width: '100%', fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
+            <span>© 2026 Simple Screen Recorder. All rights reserved.</span>
+            <span>Independent Craft Product.</span>
+          </div>
         </div>
       </footer>
     </div>

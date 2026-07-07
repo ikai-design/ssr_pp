@@ -792,6 +792,10 @@ export default function LandingPage() {
             <Link to={PRIVACY_POLICY_URL}>Privacy</Link>
             <Link to={TERMS_URL}>Terms</Link>
           </div>
+          <div className="footer-copyright">
+            <span>© 2026 Simple Screen Recorder. All rights reserved.</span>
+            <span>Independent Craft Product.</span>
+          </div>
         </div>
       </footer>
     </div>
