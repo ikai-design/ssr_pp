@@ -1440,3 +1440,18 @@ h1, h2, h3, h4 {
   }
 }
 
+/* Product Video Player */
+.simulator-video-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-surface);
+  line-height: 0;
+}
+
+.simulator-video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
