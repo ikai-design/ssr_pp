@@ -1287,6 +1287,10 @@ h1, h2, h3, h4 {
     flex-direction: column;
     gap: 0.65rem;
   }
+  .app-header .logo svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
   .simulator-body {
     height: 400px;
   }
