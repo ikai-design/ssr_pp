@@ -331,7 +331,7 @@ export default function LandingPageV2() {
       <header className={`app-header${mobileNavOpen ? ' mobile-nav-open' : ''}${scrolled ? ' app-header--scrolled' : ''}`}>
         <div className="container header-container">
           <Link to={V2_PATH} className="logo" tabIndex={headerNavTabIndex} onClick={handleLogoClick}>
-            <svg width="20" height="20" viewBox="74 75 499 499" className="logo-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <svg width="20" height="20" viewBox="87 75 473 499" className="logo-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
               <path d="M297.149 75C435.041 75 560 186.705 560 324.5C560 462.295 435.041 574 297.149 574C159.257 574 87 462.295 87 324.5C87 186.705 159.257 75 297.149 75Z" fill="currentColor"/>
               <rect x="235" y="249" width="56" height="151" rx="28" fill="white"/>
               <rect x="355" y="249" width="56" height="151" rx="28" fill="white"/>
@@ -553,7 +553,7 @@ export default function LandingPageV2() {
       <footer className="app-footer">
         <div className="container footer-content">
           <Link to={V2_PATH} className="logo">
-            <svg width="20" height="20" viewBox="74 75 499 499" className="logo-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <svg width="20" height="20" viewBox="87 75 473 499" className="logo-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
               <path d="M297.149 75C435.041 75 560 186.705 560 324.5C560 462.295 435.041 574 297.149 574C159.257 574 87 462.295 87 324.5C87 186.705 159.257 75 297.149 75Z" fill="currentColor"/>
               <rect x="235" y="249" width="56" height="151" rx="28" fill="white"/>
               <rect x="355" y="249" width="56" height="151" rx="28" fill="white"/>
