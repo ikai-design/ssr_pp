@@ -32,6 +32,7 @@ const V2_PATH = '/';
 const HEADER_NAV_LINKS = [
   { href: '#use-cases', label: 'Use cases' },
   { href: '#how-it-works', label: 'How it works' },
+  { href: '#features', label: 'Features' },
   { href: '#privacy', label: 'Privacy' },
   { href: '#faq', label: 'FAQ' },
 ];
@@ -78,6 +79,64 @@ const HOW_IT_WORKS_STEPS = [
     title: 'Export MP4 directly to your device',
     body: 'Download the finished MP4 directly to your device.',
     Animation: ExportAnimation,
+  },
+];
+
+const FEATURES = [
+  {
+    title: 'Auto zoom on clicks',
+    body: 'Every click becomes a smooth zoom. Each one is a block on the timeline you can move, resize, delete or add.',
+  },
+  {
+    title: 'Webcam overlay',
+    body: 'Your camera records as a separate track, so you can move, resize, reshape or hide it after recording.',
+  },
+  {
+    title: 'Pause and resume',
+    body: 'Stop mid-take, switch context, and continue the same recording instead of starting over.',
+  },
+  {
+    title: 'Crop and aspect ratios',
+    body: 'Crop to the area that matters, or export as 16:9, 9:16, 1:1, 4:3 or 3:4 for any platform.',
+  },
+  {
+    title: 'Backgrounds and browser frames',
+    body: 'Gradients, solid colours or your own image, with a clean browser window frame around the recording.',
+  },
+  {
+    title: 'MP4 up to 4K',
+    body: 'Hardware-accelerated export from 720p to 4K, processed on your computer. No watermark.',
+  },
+  {
+    title: 'Recordings library',
+    body: 'Every recording is saved on your device, so you can reopen it, re-edit it and export again.',
+  },
+  {
+    title: 'Microphone and system audio',
+    body: 'Record your voice together with tab or system audio.',
+  },
+];
+
+const COMPARE_LINKS = [
+  {
+    href: '/loom-alternative/',
+    title: 'Loom alternative',
+    body: 'For a polished MP4 you own, without a workspace or cloud upload.',
+  },
+  {
+    href: '/screen-studio-alternative/',
+    title: 'Screen Studio alternative',
+    body: 'Click-zoom recordings on Windows and Linux, not only macOS.',
+  },
+  {
+    href: '/cap-alternative/',
+    title: 'Cap alternative',
+    body: 'Record in the browser without installing a desktop app.',
+  },
+  {
+    href: '/free-chrome-extension/',
+    title: 'Free Chrome screen recorder',
+    body: 'What is free, what is not, and why.',
   },
 ];
 
@@ -511,6 +570,87 @@ export default function LandingPageV2() {
           </div>
         </section>
 
+        <section id="features" className="v2-features">
+          <div className="container">
+            <ScrollReveal>
+              <div className="v2-section-header">
+                <p className="v2-section-label">Features</p>
+                <h2 className="heading-2">Everything you need for a clean demo video.</h2>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delayMs={80}>
+              <ul className="v2-feature-grid">
+                {FEATURES.map(({ title, body }) => (
+                  <li key={title} className="v2-feature-card">
+                    <h3 className="v2-feature-card__title">{title}</h3>
+                    <p className="v2-body-text">{body}</p>
+                  </li>
+                ))}
+              </ul>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        <section id="compare" className="v2-compare">
+          <div className="container">
+            <ScrollReveal>
+              <div className="v2-section-header">
+                <p className="v2-section-label">Compare</p>
+                <h2 className="heading-2">Choosing a screen recorder?</h2>
+                <p className="v2-body-text v2-compare__intro">
+                  Honest comparisons with the tools people usually look at, including when they are the better choice.
+                </p>
+              </div>
+            </ScrollReveal>
+            <ul className="v2-compare-grid">
+              {COMPARE_LINKS.map(({ href, title, body }) => (
+                <li key={href}>
+                  <a href={href} className="v2-compare-card">
+                    <span className="v2-compare-card__title">
+                      {title}
+                      <ArrowRight size={16} aria-hidden />
+                    </span>
+                    <span className="v2-body-text">{body}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <ScrollReveal>
+              <div className="v2-about" id="about">
+                <img
+                  src="/author-avatar.jpg"
+                  alt="Eugene Voroniuk"
+                  className="v2-about__avatar"
+                  width="72"
+                  height="72"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div>
+                  <p className="v2-section-label">Who makes it</p>
+                  <p className="v2-about__text">
+                    Simple Screen Recorder is built by Eugene Voroniuk, an independent product designer in Amsterdam,
+                    and published by {LEGAL_ENTITY_PLACEHOLDER}. It started as a tool for recording his own browser
+                    demos and is shaped by feedback from the people who use it.
+                  </p>
+                  <p className="v2-about__links">
+                    <a href="https://www.linkedin.com/in/eugene-voroniuk/" target="_blank" rel="noreferrer" className="v2-text-link">
+                      LinkedIn
+                    </a>
+                    <a href="/blog/" className="v2-text-link">
+                      Blog
+                    </a>
+                    <a href={TALLY_FEEDBACK_URL} target="_blank" rel="noreferrer" className="v2-text-link">
+                      Send feedback
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
         <section id="faq" className="v2-faq">
           <div className="container">
             <div className="v2-faq-layout">
@@ -561,7 +701,10 @@ export default function LandingPageV2() {
             <span className="logo-text">Simple Screen Recorder</span>
           </Link>
           <div className="footer-links">
-            <a href="/blog">Blog</a>
+            <a href="/loom-alternative/">Loom alternative</a>
+            <a href="/screen-studio-alternative/">Screen Studio alternative</a>
+            <a href="/cap-alternative/">Cap alternative</a>
+            <a href="/blog/">Blog</a>
             <a href={CHROME_WEB_STORE_URL} target="_blank" rel="noreferrer">
               Chrome Web Store
             </a>

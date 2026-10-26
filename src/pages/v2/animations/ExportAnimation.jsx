@@ -21,7 +21,7 @@ export function ExportAnimation() {
         <div className="w-[66%] min-w-[250px] rounded-lg bg-white p-6 shadow-md">
           <div className="space-y-4 text-[9px]">
             <div>
-              <div className="mb-1 font-semibold text-gray-600">Format</div>
+              <div className="mb-1 font-semibold text-gray-600">Resolution</div>
               <div className="flex h-7 rounded-md bg-gray-100 p-0.5">
                 <MotionSpan
                   className="flex flex-1 items-center justify-center rounded bg-white text-center font-semibold shadow-sm"
@@ -30,9 +30,9 @@ export function ExportAnimation() {
                   }}
                   transition={loop([0, 0.12, 0.2, 1])}
                 >
-                  MP4
+                  1080p
                 </MotionSpan>
-                <span className="flex flex-1 items-center justify-center text-center text-gray-400">WebM</span>
+                <span className="flex flex-1 items-center justify-center text-center text-gray-400">4K</span>
               </div>
             </div>
 

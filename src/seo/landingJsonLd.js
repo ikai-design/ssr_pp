@@ -1,7 +1,24 @@
 import { LANDING_FAQ_ITEMS } from '../content/landingFaq';
 
 const META_DESCRIPTION =
-  'Record a tab or screen in Chrome: guided click-to-zoom demos, browser-style frames, gradients or custom image backgrounds, timeline editing, pause/resume, and local WebM/MP4 export—no cloud upload for the default workflow.';
+  'Free Chrome screen recorder with auto zoom on clicks, webcam overlay, crop and trim. Export MP4 up to 4K on your device — no account, no watermark, no uploads.';
+
+/** Keep in sync with the extension's manifest version and the CWS listing. */
+const SOFTWARE_VERSION = '2.6.2';
+const DATE_MODIFIED = '2026-10-26';
+
+const FEATURE_LIST = [
+  'Record a Chrome tab, app window or full screen',
+  'Auto zoom on clicks, editable on a timeline',
+  'Pause and resume while recording',
+  'Webcam overlay recorded as a separate, editable track',
+  'Microphone plus tab or system audio',
+  'Crop and aspect-ratio presets (16:9, 9:16, 1:1, 4:3, 3:4)',
+  'Backgrounds and browser frames',
+  'Trim, undo and redo',
+  'MP4 export from 720p up to 4K, processed locally',
+  'On-device recordings library',
+];
 
 function isLikelyChromeStoreUrl(url) {
   return (
@@ -26,6 +43,7 @@ export function buildLandingJsonLd({
   const base = siteOrigin.replace(/\/$/, '');
   const websiteId = `${base}/#website`;
   const orgId = `${base}/#organization`;
+  const authorId = `${base}/#author`;
 
   const graph = [
     {
@@ -50,12 +68,28 @@ export function buildLandingJsonLd({
       },
     },
     {
+      '@type': 'Person',
+      '@id': authorId,
+      name: 'Eugene Voroniuk',
+      jobTitle: 'Product designer',
+      worksFor: { '@id': orgId },
+      sameAs: ['https://www.linkedin.com/in/eugene-voroniuk/', 'https://dev.to/eugene_vo'],
+    },
+    {
       '@type': 'SoftwareApplication',
       name: 'Simple Screen Recorder',
+      alternateName: 'Simple Screen Recorder for Chrome',
       description: META_DESCRIPTION,
       applicationCategory: 'MultimediaApplication',
-      operatingSystem: 'Chrome',
+      applicationSubCategory: 'Screen recorder',
+      operatingSystem: 'Windows, macOS, Linux, ChromeOS (Chrome 116+)',
       softwareRequirements: 'Requires Chrome 116+. Manifest V3.',
+      softwareVersion: SOFTWARE_VERSION,
+      dateModified: DATE_MODIFIED,
+      featureList: FEATURE_LIST,
+      image: `${base}/og-image.png`,
+      author: { '@id': authorId },
+      publisher: { '@id': orgId },
       offers: {
         '@type': 'Offer',
         price: '0',

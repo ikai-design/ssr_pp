@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+# Old landing variants, kept for reference only
+Disallow: /v1
+Disallow: /v2
+Disallow: /sandbox
 
 Sitemap: https://simple-screen-recorder.com/sitemap.xml

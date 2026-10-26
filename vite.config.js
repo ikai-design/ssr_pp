@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
     <meta property="og:site_name" content="Simple Screen Recorder" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:image" content="${esc}/og-image.png" />
-    <meta property="og:image:alt" content="Simple Screen Recorder — Chrome screen recorder with zoom and local export" />
+    <meta property="og:image:alt" content="Simple Screen Recorder — free Chrome screen recorder with auto zoom, webcam and local MP4 export" />
     <meta name="twitter:image" content="${esc}/og-image.png" />`;
           return html.replace('</head>', `${inject}\n  </head>`);
         },

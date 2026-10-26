@@ -10,11 +10,11 @@ export function HeroOverlay() {
     <section className="v2-hero" aria-labelledby="hero-title">
       <div className="container">
         <h1 id="hero-title" className="v2-hero-title v2-display">
-          Record polished screen walkthroughs in Chrome.
+          Free screen recorder for Chrome with automatic zoom.
         </h1>
 
         <p className="v2-hero-subhead">
-          Record a tab, add guided zooms, export MP4.
+          Every click becomes a smooth zoom. Add your webcam, trim, and export an MP4 — no watermark, no account, nothing uploaded.
         </p>
 
         <div className="v2-hero-actions">
@@ -30,11 +30,11 @@ export function HeroOverlay() {
           </a>
         </div>
 
-        <p className="v2-hero-trust-line">No account · Local export · Stays on your device</p>
+        <p className="v2-hero-trust-line">Works on Windows, macOS, Linux and ChromeOS</p>
 
         <div className="v2-hero-preview">
           <p className="visually-hidden">
-            The hero preview demonstrates the screen recorder features.
+            Demo: a browser walkthrough recorded with Simple Screen Recorder, with automatic zoom on each click and a clean browser frame.
           </p>
           <div
             className={[

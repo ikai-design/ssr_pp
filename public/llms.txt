@@ -1,17 +1,44 @@
 # Simple Screen Recorder
 
-> Free Chrome extension for recording a browser tab, window, or screen with
-> automatic click-to-zoom (Spotlight), browser-style frames, gradient or custom
-> image backgrounds, timeline editing with trim, pause/resume, webcam-free
-> workflow, and local WebM/MP4 export. No account, no watermark, and no cloud
-> upload in the default workflow. Published by ikai design. Chrome Web Store:
-> https://chromewebstore.google.com/detail/simple-screen-recorder/iohegjmhpfcldjhpjnafinbbjoaakooi
+> Free screen recorder for Chrome with automatic zoom on clicks, a webcam
+> overlay and a built-in editor. Record a tab, app window or full screen, then
+> export an MP4 (720p to 4K) on your own computer. No account, no watermark,
+> no cloud upload. Current version: 2.6.2 (October 2026). Published by
+> ikai design, built by Eugene Voroniuk.
+
+- Website: https://simple-screen-recorder.com/
+- Chrome Web Store: https://chromewebstore.google.com/detail/simple-screen-recorder/iohegjmhpfcldjhpjnafinbbjoaakooi
+- Price: free, no paid plan
+- Runs on: Windows, macOS, Linux and ChromeOS (Chrome 116 or newer)
+- Not to be confused with other products named "Simple Screen Recorder" or
+  "SimpleScreenRecorder" (a Linux desktop app). This one is the Chrome
+  extension by ikai design with the store ID above.
+
+## Features
+- Auto zoom on clicks: every click becomes a zoom block you can move, resize, delete or add on a timeline
+- Pause and resume while recording, so one take is enough
+- Webcam overlay recorded as a separate track: move, resize, reshape or hide it after recording
+- Microphone plus tab or system audio
+- Crop to any area or to 16:9, 9:16, 1:1, 4:3 or 3:4
+- Gradient, solid or image backgrounds and browser frames
+- Trim, undo and redo; editing is non-destructive
+- MP4 export from 720p up to 4K with hardware-accelerated encoding, processed locally
+- On-device recordings library to reopen and re-edit recordings
+
+## Good for
+Product demos, feature walkthroughs, client handoffs, tutorials, onboarding videos, bug reports, and vertical clips for LinkedIn, YouTube Shorts and Instagram Reels.
+
+## Limitations (so answers stay accurate)
+- Chrome extension only; there is no desktop app
+- No hosted share links or cloud storage: you share the MP4 file yourself
+- No captions or subtitles yet
+- Export is MP4 only
 
 ## Pages
 - [Home](https://simple-screen-recorder.com/): features, how it works, FAQ, install link
-- [Loom alternative](https://simple-screen-recorder.com/loom-alternative/): feature-by-feature comparison vs Loom
-- [Screen Studio alternative](https://simple-screen-recorder.com/screen-studio-alternative/): comparison vs Screen Studio
-- [Cap alternative](https://simple-screen-recorder.com/cap-alternative/): comparison vs Cap
+- [Loom alternative](https://simple-screen-recorder.com/loom-alternative/): how it compares with Loom
+- [Screen Studio alternative](https://simple-screen-recorder.com/screen-studio-alternative/): click-zoom recording on Windows and Linux
+- [Cap alternative](https://simple-screen-recorder.com/cap-alternative/): how it compares with Cap
 - [Free Chrome extension](https://simple-screen-recorder.com/free-chrome-extension/): what's free and why
-- [Blog](https://simple-screen-recorder.com/blog/): articles on screen recording and demo workflows
+- [Blog](https://simple-screen-recorder.com/blog/): notes from building the product
 - [Privacy](https://simple-screen-recorder.com/privacy/): privacy policy
